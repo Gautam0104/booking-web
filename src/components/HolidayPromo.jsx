@@ -64,7 +64,10 @@ const HolidayPromo = () => {
           <div className="row g-4 mt-4">
             <div className="col-6 d-flex">
               <div className="me-3">
-                <span className="bg-success p-2 rounded-circle d-inline-block">
+                <span
+                  className="bg-success p-2 rounded-circle d-inline-block"
+                  style={{ width: "40px", height: "40px" }}
+                >
                   <i className="bi bi-egg-fried text-white"></i>
                 </span>
               </div>
@@ -79,7 +82,10 @@ const HolidayPromo = () => {
 
             <div className="col-6 d-flex">
               <div className="me-3">
-                <span className="bg-danger p-2 rounded-circle d-inline-block">
+                <span
+                  className="bg-danger p-2 rounded-circle d-inline-block"
+                  style={{ width: "40px", height: "40px" }}
+                >
                   <i className="bi bi-lightning text-white"></i>
                 </span>
               </div>
@@ -93,7 +99,10 @@ const HolidayPromo = () => {
 
             <div className="col-6 d-flex">
               <div className="me-3">
-                <span className="bg-warning p-2 rounded-circle d-inline-block">
+                <span
+                  className="bg-warning p-2 rounded-circle d-inline-block"
+                  style={{ width: "40px", height: "40px" }}
+                >
                   <i className="bi bi-shield-lock text-white"></i>
                 </span>
               </div>
@@ -107,7 +116,10 @@ const HolidayPromo = () => {
 
             <div className="col-6 d-flex">
               <div className="me-3">
-                <span className="bg-info p-2 rounded-circle d-inline-block">
+                <span
+                  className="bg-info p-2 rounded-circle d-inline-block"
+                  style={{ width: "40px", height: "40px" }}
+                >
                   <i className="bi bi-alarm text-white"></i>
                 </span>
               </div>
