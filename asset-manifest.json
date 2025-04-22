@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/Gautam0104/booking-web/static/css/main.8dbd6bb8.css",
-    "main.js": "/Gautam0104/booking-web/static/js/main.c5cbc747.js",
-    "static/js/453.6619d146.chunk.js": "/Gautam0104/booking-web/static/js/453.6619d146.chunk.js",
-    "static/media/03.jpg": "/Gautam0104/booking-web/static/media/03.14311e53ba5410d687ac.jpg",
-    "static/media/bootstrap-icons.woff?": "/Gautam0104/booking-web/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
-    "static/media/bootstrap-icons.woff2?": "/Gautam0104/booking-web/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
-    "static/media/02.jpg": "/Gautam0104/booking-web/static/media/02.dae62ce5d424bcd87278.jpg",
-    "static/media/01.jpg": "/Gautam0104/booking-web/static/media/01.c2477e5502abfe04a611.jpg",
-    "static/media/06.jpg": "/Gautam0104/booking-web/static/media/06.1096143cdb31dafe51c3.jpg",
-    "static/media/04.jpg": "/Gautam0104/booking-web/static/media/04.98d0d5389a76920699f1.jpg",
-    "static/media/12.jpg": "/Gautam0104/booking-web/static/media/12.5f6efda9914abe1e5c25.jpg",
-    "static/media/11.jpg": "/Gautam0104/booking-web/static/media/11.b664b9e7fabb27588bcb.jpg",
-    "index.html": "/Gautam0104/booking-web/index.html",
-    "main.8dbd6bb8.css.map": "/Gautam0104/booking-web/static/css/main.8dbd6bb8.css.map",
-    "main.c5cbc747.js.map": "/Gautam0104/booking-web/static/js/main.c5cbc747.js.map",
-    "453.6619d146.chunk.js.map": "/Gautam0104/booking-web/static/js/453.6619d146.chunk.js.map"
+    "main.css": "/booking-web/static/css/main.3b8331e8.css",
+    "main.js": "/booking-web/static/js/main.8ed7d06f.js",
+    "static/js/453.6619d146.chunk.js": "/booking-web/static/js/453.6619d146.chunk.js",
+    "static/media/03.jpg": "/booking-web/static/media/03.14311e53ba5410d687ac.jpg",
+    "static/media/bootstrap-icons.woff?": "/booking-web/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/bootstrap-icons.woff2?": "/booking-web/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "static/media/02.jpg": "/booking-web/static/media/02.dae62ce5d424bcd87278.jpg",
+    "static/media/01.jpg": "/booking-web/static/media/01.c2477e5502abfe04a611.jpg",
+    "static/media/06.jpg": "/booking-web/static/media/06.1096143cdb31dafe51c3.jpg",
+    "static/media/04.jpg": "/booking-web/static/media/04.98d0d5389a76920699f1.jpg",
+    "static/media/12.jpg": "/booking-web/static/media/12.5f6efda9914abe1e5c25.jpg",
+    "static/media/11.jpg": "/booking-web/static/media/11.b664b9e7fabb27588bcb.jpg",
+    "index.html": "/booking-web/index.html",
+    "main.3b8331e8.css.map": "/booking-web/static/css/main.3b8331e8.css.map",
+    "main.8ed7d06f.js.map": "/booking-web/static/js/main.8ed7d06f.js.map",
+    "453.6619d146.chunk.js.map": "/booking-web/static/js/453.6619d146.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8dbd6bb8.css",
-    "static/js/main.c5cbc747.js"
+    "static/css/main.3b8331e8.css",
+    "static/js/main.8ed7d06f.js"
   ]
 }
