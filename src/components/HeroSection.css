@@ -28,13 +28,13 @@
 
 @media (min-width: 320px) {
     .circle-1 {
-        display: none !important;
+        /* display: none !important; */
         left: 2px !important;
         /* Adjust position for very small screens */
     }
 
     .circle-2 {
-        display: none !important;
+        /* display: none !important; */
         left: 2px !important;
         /* Adjust position for very small screens */
     }

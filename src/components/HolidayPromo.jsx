@@ -11,7 +11,7 @@ const HolidayPromo = () => {
         <div className="col-md-6 mb-4 mb-md-0">
           <div className="card bg-dark text-white border-0">
             <img
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" // replace with your own
+              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
               className="card-img rounded-4"
               alt="Holiday Resort"
             />
