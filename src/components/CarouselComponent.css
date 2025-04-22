@@ -1,0 +1,30 @@
+.custom-card {
+    background-color: #191b1d;
+    color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 10px;
+    height: 180px;
+}
+
+.carousel-img {
+    width: 50%;
+    object-fit: cover;
+}
+
+.carousel-text {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel-text h5 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.carousel-text p {
+    color: #ccc;
+    font-size: 14px;
+}
