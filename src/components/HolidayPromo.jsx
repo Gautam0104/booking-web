@@ -3,7 +3,7 @@ import React from "react";
 const HolidayPromo = () => {
   return (
     <div
-      className="container py-5 text-white"
+      className="container py-5 text-white mt-5 rounded-4 shadow"
       style={{ backgroundColor: "#1c1e22" }}
     >
       <div className="row align-items-center">
