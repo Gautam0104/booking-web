@@ -1,5 +1,5 @@
 import React from "react";
-import "./Navbar.css"; // Optional: custom styles
+import "./Navbar.css";
 import {
   FaPlane,
   FaGlobe,
@@ -8,12 +8,13 @@ import {
   FaBell,
   FaEllipsisH
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3 py-2">
       <div className="container">
-        {/* Logo and brand */}
+        {/* Logo */}
         <div className="d-flex align-items-center gap-2">
           <div
             className="rounded-circle d-flex align-items-center justify-content-center"
@@ -24,7 +25,7 @@ const Navbar = () => {
           <span className="text-white fw-bold fs-5">Booking</span>
         </div>
 
-        {/* Toggler for mobile */}
+        {/* Toggler */}
         <button
           className="navbar-toggler"
           type="button"
@@ -38,40 +39,75 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarContent">
           {/* Left links */}
           <ul className="navbar-nav me-auto mt-3 mt-lg-0 d-flex align-items-lg-center gap-lg-3">
-            <li className="nav-item dropdown">
-              <a
+            <li className="nav-item dropdown hover-dropdown">
+              <Link
                 className="nav-link dropdown-toggle"
-                href="#"
+                to="#"
                 role="button"
                 data-bs-toggle="dropdown"
               >
                 Listings
-              </a>
+              </Link>
+
+              <ul className="dropdown-menu shadow rounded-3 mt-2">
+                <li>
+                  <Link className="dropdown-item" to="/hotels">
+                    Hotels
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/apartments">
+                    Apartments
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/tours">
+                    Tours
+                  </Link>
+                </li>
+              </ul>
             </li>
+
             <li className="nav-item dropdown">
-              <a
+              <Link
                 className="nav-link dropdown-toggle"
-                href="#"
+                to="#"
                 role="button"
                 data-bs-toggle="dropdown"
               >
                 Pages
-              </a>
+              </Link>
+              {/* You can add a dropdown or submenu here if needed */}
             </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/about">
+                About
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
+            </li>
+
             <li className="nav-item dropdown">
-              <a
+              <Link
                 className="nav-link dropdown-toggle"
-                href="#"
+                to="#"
                 role="button"
                 data-bs-toggle="dropdown"
               >
                 Accounts
-              </a>
+              </Link>
+              {/* Add dropdown items if needed */}
             </li>
+
             <li className="nav-item">
-              <a className="nav-link">
+              <Link className="nav-link" to="/more">
                 <FaEllipsisH />
-              </a>
+              </Link>
             </li>
           </ul>
 
@@ -100,7 +136,6 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Notification */}
             <div className="position-relative">
               <button className="btn btn-dark p-2 rounded-circle">
                 <FaBell />
@@ -108,7 +143,6 @@ const Navbar = () => {
               <span className="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
             </div>
 
-            {/* Avatar */}
             <img
               src="https://i.pravatar.cc/40"
               alt="avatar"

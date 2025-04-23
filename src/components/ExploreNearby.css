@@ -1,0 +1,7 @@
+img.rounded-circle {
+    transition: transform 0.3s;
+}
+
+img.rounded-circle:hover {
+    transform: scale(1.05);
+}

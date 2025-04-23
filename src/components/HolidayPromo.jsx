@@ -1,4 +1,5 @@
 import React from "react";
+import Image01 from "../assets/img/holidayPromo/01.jpg";
 
 const HolidayPromo = () => {
   return (
@@ -8,10 +9,10 @@ const HolidayPromo = () => {
     >
       <div className="row align-items-center">
         {/* Left: Image Card */}
-        <div className="col-md-6 mb-4 mb-md-0">
+        <div className="col-md-4 mb-4 mb-md-0 me-md-5">
           <div className="card bg-dark text-white border-0">
             <img
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+              src={Image01}
               className="card-img rounded-4"
               alt="Holiday Resort"
             />
@@ -50,82 +51,102 @@ const HolidayPromo = () => {
         </div>
 
         {/* Right: Content */}
-        <div className="col-md-6">
-          <h2 className="fw-bold display-6">
+        <div className="col-md-6 ms-md-5">
+          <h2 className="fw-bold display-6 text-start top-0 mb-4">
             The Best Holidays
             <br />
             Start Here!
           </h2>
-          <p className="text-white ">
+          <p className="text-white text-start mt-5 mb-5">
             Book your hotel with us and don't forget to grab an awesome hotel
             deal to save massive on your stay.
           </p>
 
           <div className="row g-4 mt-4">
-            <div className="col-6 d-flex">
+            <div className="col-6 d-flex flex-column text-start">
               <div className="me-3">
                 <span
-                  className="bg-success p-2 rounded-circle d-inline-block"
-                  style={{ width: "40px", height: "40px" }}
+                  className="bg-success p-2 rounded-circle d-inline-block text-center mb-3 d-flex justify-content-center align-items-center"
+                  style={{ width: "45px", height: "45px" }}
                 >
                   <i className="bi bi-egg-fried text-white"></i>
                 </span>
               </div>
               <div>
-                <h6 className="fw-bold">Quality Food</h6>
-                <p className="text-white mb-0">
+                <h6
+                  className="fw-bold text-start"
+                  style={{ fontSize: "1.5rem" }}
+                >
+                  Quality Food
+                </h6>
+                <p className="text-white mb-0 text-start">
                   Departure defective arranging rapturous did. Conduct denied
                   adding worthy little.
                 </p>
               </div>
             </div>
 
-            <div className="col-6 d-flex">
-              <div className="me-3">
+            <div className="col-6 d-flex flex-column text-start">
+              <div className="me-3 ">
                 <span
-                  className="bg-danger p-2 rounded-circle d-inline-block"
-                  style={{ width: "40px", height: "40px" }}
+                  className="bg-danger p-2 rounded-circle d-inline-block text-center mb-3 d-flex justify-content-center align-items-center"
+                  style={{ width: "45px", height: "45px" }}
                 >
                   <i className="bi bi-lightning text-white"></i>
                 </span>
               </div>
               <div>
-                <h6 className="fw-bold">Quick Services</h6>
-                <p className="text-white mb-0">
+                <h6
+                  className="fw-bold text-start"
+                  style={{ fontSize: "1.5rem" }}
+                >
+                  Quick Services
+                </h6>
+                <p className="text-white mb-0 text-start">
                   Supposing so be resolving breakfast am or perfectly.
                 </p>
               </div>
             </div>
 
-            <div className="col-6 d-flex">
+            <div className="col-6 d-flex flex-column text-start">
               <div className="me-3">
                 <span
-                  className="bg-warning p-2 rounded-circle d-inline-block"
-                  style={{ width: "40px", height: "40px" }}
+                  className="bg-warning p-2 rounded-circle d-inline-block text-center mb-3 d-flex justify-content-center align-items-center"
+                  style={{ width: "45px", height: "45px" }}
                 >
                   <i className="bi bi-shield-lock text-white"></i>
                 </span>
               </div>
               <div>
-                <h6 className="fw-bold">High Security</h6>
-                <p className="text-white mb-0">
+                <h6
+                  className="fw-bold text-start"
+                  style={{ fontSize: "1.5rem" }}
+                >
+                  High Security
+                </h6>
+                <p className="text-white mb-0 text-start">
                   Arranging rapturous did believe him all had supported.
                 </p>
               </div>
             </div>
 
-            <div className="col-6 d-flex">
+            <div className="col-6 d-flex flex-column text-start">
               <div className="me-3">
                 <span
-                  className="bg-info p-2 rounded-circle d-inline-block"
-                  style={{ width: "40px", height: "40px" }}
+                  className="bg-info p-2 rounded-circle d-inline-block text-center mb-3 d-flex justify-content-center align-items-center"
+                  style={{ width: "45px", height: "45px" }}
                 >
                   <i className="bi bi-alarm text-white"></i>
                 </span>
               </div>
               <div>
-                <h6 className="fw-bold">24 Hours Alert</h6>
-                <p className="text-white mb-0">
+                <h6
+                  className="fw-bold text-start"
+                  style={{ fontSize: "1.5rem" }}
+                >
+                  24 Hours Alert
+                </h6>
+                <p className="text-white mb-0 text-start">
                   Rapturous did believe him all had supported.
                 </p>
               </div>
