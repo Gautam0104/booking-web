@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3 py-2">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3 py-4">
       <div className="container">
         {/* Logo */}
         <div className="d-flex align-items-center gap-2">
@@ -39,7 +39,8 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarContent">
           {/* Left links */}
           <ul className="navbar-nav me-auto mt-3 mt-lg-0 d-flex align-items-lg-center gap-lg-3">
-            <li className="nav-item dropdown hover-dropdown">
+            {/* Listings Dropdown */}
+            <li className="nav-item dropdown hover-dropdown ms-2">
               <Link
                 className="nav-link dropdown-toggle"
                 to="#"
@@ -48,21 +49,52 @@ const Navbar = () => {
               >
                 Listings
               </Link>
-
-              <ul className="dropdown-menu shadow rounded-3 mt-2">
-                <li>
-                  <Link className="dropdown-item" to="/hotels">
-                    Hotels
+              <ul
+                className="dropdown-menu shadow rounded-3  px-2"
+                style={{ width: "250px" }}
+              >
+                <li className="dropdown-submenu dropend">
+                  <Link
+                    className="dropdown-item"
+                    to="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    <span className="d-flex align-items-center justify-content-between">
+                      Hotel
+                      <FaEllipsisH />
+                    </span>
                   </Link>
+                  <ul
+                    className="dropdown-menu shadow rounded-3  px-2 "
+                    style={{ width: "250px", marginLeft: "10px" }}
+                  >
+                    <li>
+                      <Link className="dropdown-item" to="/hotellist">
+                        Hotel List
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/hotelgrid">
+                        Hotel Grid
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
                 <li>
                   <Link className="dropdown-item" to="/apartments">
-                    Apartments
+                    <span className="d-flex align-items-center justify-content-between">
+                      Apartments
+                      <FaEllipsisH />
+                    </span>
                   </Link>
                 </li>
                 <li>
                   <Link className="dropdown-item" to="/tours">
-                    Tours
+                    <span className="d-flex align-items-center justify-content-between">
+                      Tours
+                      <FaEllipsisH />
+                    </span>
                   </Link>
                 </li>
               </ul>
@@ -77,13 +109,7 @@ const Navbar = () => {
               >
                 Pages
               </Link>
-              {/* You can add a dropdown or submenu here if needed */}
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">
-                About
-              </Link>
+              {/* Add submenu if needed */}
             </li>
 
             <li className="nav-item">
@@ -101,7 +127,7 @@ const Navbar = () => {
               >
                 Accounts
               </Link>
-              {/* Add dropdown items if needed */}
+              {/* Add submenu if needed */}
             </li>
 
             <li className="nav-item">
