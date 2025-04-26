@@ -11,6 +11,7 @@ import BackToTop from "./components/BackToTop";
 import Home from "./pages/Home"; // Default import
 import { About } from "./pages/About"; // Named import
 import { HotelList } from "./pages/HotelList";
+import HotelGrid from "./pages/HotelGrid";
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
           {/* Use named import for About page */}
           <Route path="/about" element={<About />} />
           <Route path="/hotellist" element={<HotelList />} />
+          <Route path="/hotelgrid" element={<HotelGrid />} />
+          {/* Add more routes as needed */}
         </Routes>
         <BackToTop />
         <Footer />
