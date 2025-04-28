@@ -79,6 +79,16 @@ const Navbar = () => {
                         Hotel Grid
                       </Link>
                     </li>
+                    <li>
+                      <Link className="dropdown-item" to="/hoteldetail">
+                        Hotel Detail
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/roomdetail">
+                        Room Detail
+                      </Link>
+                    </li>
                   </ul>
                 </li>
                 <li>

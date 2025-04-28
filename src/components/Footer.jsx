@@ -18,7 +18,10 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-light pt-5 pb-3 px-4">
+    <footer
+      className="text-light pt-5 pb-3 px-4 "
+      style={{ background: "#0b0a12" }}
+    >
       <div className="container">
         {/* Top row */}
         <div className="row gy-4 justify-content-between">
@@ -33,22 +36,22 @@ const Footer = () => {
               </div>
               <span className="fs-5 fw-bold">Booking</span>
             </div>
-            <p className="text-md-start">
+            <p className="text-md-start opacity-75">
               Departure defective arranging rapturous did believe him all had
               supported.
             </p>
-            <p className="text-md-start">
+            <p className="text-md-start opacity-75">
               <FaPhone className="me-2" /> +1234 568 963
             </p>
-            <p className="text-md-start">
+            <p className="text-md-start opacity-75">
               <FaEnvelope className="me-2" /> example@gmail.com
             </p>
           </div>
 
           {/* Column 2: Pages */}
           <div className="col-md-2">
-            <h6 className="fw-bold mb-3">Page</h6>
-            <ul className="list-unstyled">
+            <h5 className="fw-bold mb-3">Page</h5>
+            <ul className="list-unstyled opacity-75">
               <li>About us</li>
               <li>Contact us</li>
               <li>News and Blog</li>
@@ -58,8 +61,8 @@ const Footer = () => {
 
           {/* Column 3: Links */}
           <div className="col-md-2">
-            <h6 className="fw-bold mb-3">Link</h6>
-            <ul className="list-unstyled">
+            <h5 className="fw-bold mb-3">Link</h5>
+            <ul className="list-unstyled opacity-75">
               <li>Sign up</li>
               <li>Sign in</li>
               <li>Privacy Policy</li>
@@ -71,8 +74,8 @@ const Footer = () => {
 
           {/* Column 4: Global Site */}
           <div className="col-md-2">
-            <h6 className="fw-bold mb-3">Global Site</h6>
-            <ul className="list-unstyled">
+            <h5 className="fw-bold mb-3">Global Site</h5>
+            <ul className="list-unstyled opacity-75">
               <li>India</li>
               <li>California</li>
               <li>Indonesia</li>
@@ -83,8 +86,8 @@ const Footer = () => {
 
           {/* Column 5: Booking */}
           <div className="col-md-2">
-            <h6 className="fw-bold mb-3">Booking</h6>
-            <ul className="list-unstyled">
+            <h5 className="fw-bold mb-3">Booking</h5>
+            <ul className="list-unstyled opacity-75">
               <li>
                 <FaHotel className="me-2" /> Hotel
               </li>
@@ -102,9 +105,9 @@ const Footer = () => {
         </div>
 
         {/* Middle links */}
-        <div className="row mt-5 border-top pt-4">
-          <h6 className="fw-bold">Top Links</h6>
-          <p className="text-white-50">
+        <div className="row mt-5  pt-4">
+          <h5 className="fw-bold text-start">Top Links</h5>
+          <p className="text-white-50 text-start">
             Flights Hotels Tours Cabs About Contact us Blogs Services Detail
             page Policy Testimonials Newsletters Podcasts Protests NewsCyber
             Education Sports Tech and Auto Opinion Share Market
@@ -113,8 +116,8 @@ const Footer = () => {
 
         {/* Payment and social */}
         <div className="row mt-4 justify-content-between align-items-center">
-          <div className="col-md-6">
-            <h6 className="fw-bold mb-2">Payment & Security</h6>
+          <div className="col-md-6 text-start">
+            <h5 className="fw-bold mb-2">Payment & Security</h5>
             <div className="d-flex align-items-center gap-3">
               {/* <img src={paypal} alt="PayPal" style={{ height: 35 }} />
               <img src={visa} alt="Visa" style={{ height: 35 }} />
@@ -123,7 +126,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="col-md-4 text-md-end mt-3 mt-md-0">
-            <h6 className="fw-bold mb-2">Follow us on</h6>
+            <h5 className="fw-bold mb-2 me-2">Follow us on</h5>
             <div className="d-flex gap-2 justify-content-md-end">
               <button className="btn btn-primary btn-sm rounded-circle">
                 <FaFacebookF />
@@ -140,13 +143,13 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
+        <hr />
         {/* Bottom row */}
-        <div className="row mt-4 border-top pt-3">
-          <div className="col-md-8">
+        <div className="row mt-4  pt-3">
+          <div className="col-md-8 text-start opacity-75">
             <small>Copyrights ©2024 Booking. Build by gkshukla.</small>
           </div>
-          <div className="col-md-4 text-md-end">
+          <div className="col-md-4 text-md-end opacity-75">
             <small className="me-3">Privacy policy</small>
             <small className="me-3">Terms and conditions</small>
             <small>Refund policy</small>
