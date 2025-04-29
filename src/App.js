@@ -12,6 +12,7 @@ import Home from "./pages/Home"; // Default import
 import { About } from "./pages/About"; // Named import
 import { HotelList } from "./pages/HotelList";
 import HotelGrid from "./pages/HotelGrid";
+import RoomDetail from "./pages/RoomDetail";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelgrid" element={<HotelGrid />} />
+          <Route path="/roomdetail" element={<RoomDetail />} />
           {/* Add more routes as needed */}
         </Routes>
         <BackToTop />
