@@ -1,35 +1,45 @@
 {
   "files": {
     "main.css": "/booking-web/static/css/main.27143eff.css",
-    "main.js": "/booking-web/static/js/main.9a3b436a.js",
-    "static/js/453.6619d146.chunk.js": "/booking-web/static/js/453.6619d146.chunk.js",
+    "main.js": "/booking-web/static/js/main.ad7b949b.js",
+    "static/js/453.d2d24df3.chunk.js": "/booking-web/static/js/453.d2d24df3.chunk.js",
+    "static/media/14.jpg": "/booking-web/static/media/14.2ced8c58165df50f9777.jpg",
+    "static/media/13.jpg": "/booking-web/static/media/13.d0b969d0174d397471d2.jpg",
+    "static/media/11.jpg": "/booking-web/static/media/11.b664b9e7fabb27588bcb.jpg",
+    "static/media/16.jpg": "/booking-web/static/media/16.0189cdc460e5849fa5e1.jpg",
+    "static/media/12.jpg": "/booking-web/static/media/12.5f6efda9914abe1e5c25.jpg",
     "static/media/08.jpg": "/booking-web/static/media/08.a7b68a933b57a9ac4618.jpg",
     "static/media/01.jpg": "/booking-web/static/media/01.9173d8de137146ade0ca.jpg",
     "static/media/03.jpg": "/booking-web/static/media/03.214efc4376e068fe8a0d.jpg",
     "static/media/bootstrap-icons.woff?": "/booking-web/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
     "static/media/bootstrap-icons.woff2?": "/booking-web/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
     "static/media/02.jpg": "/booking-web/static/media/02.9d41e4b56f0a97ff71c0.jpg",
+    "static/media/15.jpg": "/booking-web/static/media/15.442fea3ccf9c741d3d57.jpg",
     "static/media/06.jpg": "/booking-web/static/media/06.3272a457f15eeee238ba.jpg",
     "static/media/04.jpg": "/booking-web/static/media/04.0eafdbd580402c12ad0c.jpg",
     "static/media/10.jpg": "/booking-web/static/media/10.5c16415ff703412ed1b8.jpg",
-    "static/media/12.jpg": "/booking-web/static/media/12.5f6efda9914abe1e5c25.jpg",
     "static/media/09.jpg": "/booking-web/static/media/09.dcde9634b80e354a005f.jpg",
-    "static/media/11.jpg": "/booking-web/static/media/11.b664b9e7fabb27588bcb.jpg",
     "static/media/03.svg": "/booking-web/static/media/03.3c094d79041425af451ef9cab4a87494.svg",
     "static/media/05.jpg": "/booking-web/static/media/05.11992f9cceffb88f5945.jpg",
+    "static/media/17.svg": "/booking-web/static/media/17.fc3b6e174c32f08928c93a84b6cf6eda.svg",
     "static/media/07.jpg": "/booking-web/static/media/07.4aba5ca2649a68bfbf66.jpg",
     "static/media/06.svg": "/booking-web/static/media/06.dc9576c06d7cd2c0ac914888bc00125b.svg",
+    "static/media/mastercard.svg": "/booking-web/static/media/mastercard.dac31ecff9803347fa15d9c20888497e.svg",
     "static/media/05.svg": "/booking-web/static/media/05.fa440796cdc220949c714c8ac69a7848.svg",
     "static/media/04.svg": "/booking-web/static/media/04.c77162bbd35647228e21956ebffaf0f3.svg",
+    "static/media/expresscard.svg": "/booking-web/static/media/expresscard.b6b254138c89d5cc464e314f42f866f0.svg",
     "static/media/02.svg": "/booking-web/static/media/02.cad995911adb0da24121d5ac1c2444e8.svg",
     "static/media/01.svg": "/booking-web/static/media/01.87e6538b1fe4371b09eb4cf953bf7c08.svg",
+    "static/media/visa.svg": "/booking-web/static/media/visa.464a962980d53ffa064ea0b6f684b805.svg",
+    "static/media/16.svg": "/booking-web/static/media/16.73e8fb041f556c56a4b51e183f6cdaa9.svg",
+    "static/media/12.svg": "/booking-web/static/media/12.f2b79866800469da8be5f5829b1eecea.svg",
     "index.html": "/booking-web/index.html",
     "main.27143eff.css.map": "/booking-web/static/css/main.27143eff.css.map",
-    "main.9a3b436a.js.map": "/booking-web/static/js/main.9a3b436a.js.map",
-    "453.6619d146.chunk.js.map": "/booking-web/static/js/453.6619d146.chunk.js.map"
+    "main.ad7b949b.js.map": "/booking-web/static/js/main.ad7b949b.js.map",
+    "453.d2d24df3.chunk.js.map": "/booking-web/static/js/453.d2d24df3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.27143eff.css",
-    "static/js/main.9a3b436a.js"
+    "static/js/main.ad7b949b.js"
   ]
 }
