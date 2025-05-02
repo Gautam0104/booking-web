@@ -89,6 +89,11 @@ const Navbar = () => {
                         Room Detail
                       </Link>
                     </li>
+                    <li>
+                      <Link className="dropdown-item" to="/hotelbooking">
+                        Hotel Booking
+                      </Link>
+                    </li>
                   </ul>
                 </li>
                 <li>

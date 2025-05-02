@@ -14,6 +14,7 @@ import { HotelList } from "./pages/HotelList";
 import HotelGrid from "./pages/HotelGrid";
 import RoomDetail from "./pages/RoomDetail";
 import HotelDetail from "./pages/HotelDetail";
+import HotelBooking from "./pages/HotelBooking";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/hotelgrid" element={<HotelGrid />} />
           <Route path="/hoteldetail" element={<HotelDetail />} />
           <Route path="/roomdetail" element={<RoomDetail />} />
+          <Route path="/hotelbooking" element={<HotelBooking />} />
           {/* Add more routes as needed */}
         </Routes>
         <BackToTop />
