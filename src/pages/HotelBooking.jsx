@@ -220,14 +220,7 @@ const HotelBooking = () => {
                     <div className="col-md-2">
                       <div className="form-size-lg">
                         <label className="form-label">Title</label>
-                        <div
-                          className="choices"
-                          data-type="select-one"
-                          tabindex="0"
-                          role="listbox"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
+                        <div className="choices">
                           <div className="choices__inner">
                             <select
                               className="form-select form-select-lg js-choice choices__input bg-dark text-white border-secondary"
@@ -697,14 +690,7 @@ const HotelBooking = () => {
                               proceed to continue with your payment.
                             </p>
                             <div className="col-md-6">
-                              <div
-                                className="choices"
-                                data-type="select-one"
-                                tabindex="0"
-                                role="listbox"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
+                              <div className="choices">
                                 <div class="choices__inner">
                                   <select
                                     class="form-select form-select-sm js-choice border-0 choices__input"
@@ -753,7 +739,6 @@ const HotelBooking = () => {
                                     <div
                                       id="choices--t1s6-item-choice-2"
                                       class="choices__item choices__item--choice choices__item--selectable"
-                                      role="option"
                                       data-choice=""
                                       data-id="2"
                                       data-value="Bank of America"
@@ -765,7 +750,6 @@ const HotelBooking = () => {
                                     <div
                                       id="choices--t1s6-item-choice-3"
                                       class="choices__item choices__item--choice choices__item--selectable"
-                                      role="option"
                                       data-choice=""
                                       data-id="3"
                                       data-value="Bank of India"
@@ -777,7 +761,6 @@ const HotelBooking = () => {
                                     <div
                                       id="choices--t1s6-item-choice-4"
                                       class="choices__item choices__item--choice choices__item--selectable"
-                                      role="option"
                                       data-choice=""
                                       data-id="4"
                                       data-value="Bank of London"
