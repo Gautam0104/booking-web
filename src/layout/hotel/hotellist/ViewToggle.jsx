@@ -8,7 +8,7 @@ export const ViewToggle = () => {
       <div className="d-flex justify-content-end">
         <div className="d-flex rounded-pill overflow-hidden p-2">
           <Link
-            to="/hotels/list"
+            to="/hotellist"
             className="px-3 py-2 d-flex align-items-center justify-content-center text-white rounded-start-2"
             style={{
               backgroundColor: "black",
@@ -18,7 +18,7 @@ export const ViewToggle = () => {
             <FaThList className="text-primary" />
           </Link>
           <Link
-            to="/hotels/grid"
+            to="/hotelgrid"
             className="px-3 py-2 d-flex align-items-center justify-content-center text-white rounded-end-2"
             style={{
               backgroundColor: "grey",
