@@ -90,6 +90,11 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
+                      <Link className="dropdown-item" to="/hotelresort">
+                        Hotel Resort
+                      </Link>
+                    </li>
+                    <li>
                       <Link className="dropdown-item" to="/hotelbooking">
                         Hotel Booking
                       </Link>

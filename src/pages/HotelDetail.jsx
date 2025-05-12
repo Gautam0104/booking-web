@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Image11 from "../assets/img/hoteldetail/11.jpg";
 import Image12 from "../assets/img/hoteldetail/12.jpg";
@@ -7,6 +7,11 @@ import Image14 from "../assets/img/hoteldetail/14.jpg";
 import AboutHotelDetail from "../layout/hotel/abouthoteldetail/AboutHotelDetail";
 
 const HotelDetail = () => {
+  const [popupImage, setPopupImage] = useState(null);
+
+  const openImage = (img) => setPopupImage(img);
+  const closeImage = () => setPopupImage(null);
+
   return (
     <div className="bg-dark text-white min-vh-100 py-4">
       <div className="container">
@@ -120,34 +125,51 @@ const HotelDetail = () => {
         </div>
 
         {/* Image Gallery */}
-
         <div className="row g-2 mt-3">
-          {/* Large Image */}
           <div className="col-md-6">
-            <img src={Image14} alt="" className="img-fluid rounded h-100" />
+            <div
+              className="image-hover-container"
+              onClick={() => openImage(Image14)}
+            >
+              <img src={Image14} alt="" className="img-fluid rounded h-100" />
+              <i className="bi bi-arrows-fullscreen popup-icon"></i>
+            </div>
           </div>
 
-          {/* Small Images Grid */}
           <div className="col-md-6">
             <div className="row g-2">
-              {/* First Small Image */}
               <div className="col-12">
-                <img
-                  src={Image13}
-                  alt=""
-                  className="img-fluid rounded"
-                  style={{ height: "150px", objectFit: "cover", width: "100%" }}
-                />
+                <div
+                  className="image-hover-container"
+                  onClick={() => openImage(Image13)}
+                >
+                  <img
+                    src={Image13}
+                    alt=""
+                    className="img-fluid rounded"
+                    style={{
+                      height: "150px",
+                      objectFit: "cover",
+                      width: "100%"
+                    }}
+                  />
+                  <i className="bi bi-arrows-fullscreen popup-icon"></i>
+                </div>
               </div>
-
-              {/* Second Small Image */}
               <div className="col-md-6">
-                <img src={Image12} alt="" className="img-fluid rounded" />
+                <div
+                  className="image-hover-container"
+                  onClick={() => openImage(Image12)}
+                >
+                  <img src={Image12} alt="" className="img-fluid rounded" />
+                  <i className="bi bi-arrows-fullscreen popup-icon"></i>
+                </div>
               </div>
-
-              {/* Third Small Image with View All */}
               <div className="col-md-6">
-                <div className="position-relative">
+                <div
+                  className="image-hover-container"
+                  onClick={() => openImage(Image11)}
+                >
                   <img
                     src={Image11}
                     className="img-fluid rounded"
@@ -156,12 +178,51 @@ const HotelDetail = () => {
                   <div className="position-absolute top-50 start-50 translate-middle text-white fw-bold">
                     View all
                   </div>
+                  <i className="bi bi-arrows-fullscreen popup-icon"></i>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Fullscreen Modal */}
+        {popupImage && (
+          <div
+            className="modal fade show d-block"
+            tabIndex="-1"
+            role="dialog"
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.95)",
+              zIndex: 1050,
+              position: "fixed",
+              top: 0,
+              left: 0,
+              height: "100vh",
+              width: "100vw"
+            }}
+            onClick={closeImage}
+          >
+            <div
+              className="d-flex align-items-center justify-content-center h-100"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={popupImage}
+                alt="Popup"
+                className="img-fluid rounded"
+                style={{ maxHeight: "90vh", maxWidth: "90vw" }}
+              />
+              <button
+                className="btn btn-light position-absolute top-0 end-0 m-3"
+                onClick={closeImage}
+              >
+                &times;
+              </button>
+            </div>
+          </div>
+        )}
       </div>
+
       <AboutHotelDetail />
     </div>
   );

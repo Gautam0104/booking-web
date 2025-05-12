@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Image01 from "../../../assets/img/hotellist/01.jpg";
 
 export const HeroSection = () => {
+  // State to toggle visibility of input fields
+  const [showInputs, setShowInputs] = useState(false);
+  const [showMessage, setShowMessage] = useState(true); // Show message initially
+
+  const toggleInputs = () => {
+    setShowInputs((prev) => {
+      const next = !prev;
+      setShowMessage(!next); // Hide message when inputs are shown
+      return next;
+    });
+  };
+
   return (
     <div className="position-relative">
       {/* Background Image Container */}
@@ -28,7 +40,7 @@ export const HeroSection = () => {
             150 Hotels in New York
           </h1>
           <div
-            className=" rounded-4  d-flex flex-wrap gap-3 justify-content-between align-items-center shadow position-relative m-3"
+            className="rounded-4 d-flex flex-wrap justify-content-between align-items-center shadow position-relative m-3"
             style={{
               zIndex: 2,
               paddingLeft: "60px",
@@ -39,8 +51,12 @@ export const HeroSection = () => {
             }}
           >
             {/* Location */}
-            <div className="form-group flex-grow-1">
-              <label className="form-label text-muted">Location</label>
+            <div
+              className={`form-group flex-grow-1 w-auto ${
+                showInputs ? "d-block" : "d-none d-sm-block"
+              }`}
+            >
+              <label className="form-label opacity-50">Location</label>
               <div className="input-group">
                 <span className="input-group-text bg-transparent text-white border-secondary">
                   <i className="bi bi-geo-alt-fill"></i>
@@ -55,8 +71,12 @@ export const HeroSection = () => {
             </div>
 
             {/* Check-in – out */}
-            <div className="form-group flex-grow-1">
-              <label className="form-label text-muted">Check in – out</label>
+            <div
+              className={`form-group flex-grow-1 w-auto ${
+                showInputs ? "d-block" : "d-none d-sm-block"
+              }`}
+            >
+              <label className="form-label opacity-50">Check in – out</label>
               <div className="input-group">
                 <span className="input-group-text bg-transparent text-white border-secondary">
                   <i className="bi bi-calendar-range-fill"></i>
@@ -71,8 +91,12 @@ export const HeroSection = () => {
             </div>
 
             {/* Guests & Rooms */}
-            <div className="form-group flex-grow-1">
-              <label className="form-label text-muted">Guests & rooms</label>
+            <div
+              className={`form-group flex-grow-1 w-auto ${
+                showInputs ? "d-block" : "d-none d-sm-block"
+              }`}
+            >
+              <label className="form-label opacity-50">Guests & rooms</label>
               <div className="input-group">
                 <span className="input-group-text bg-transparent text-white border-secondary">
                   <i className="bi bi-person-fill"></i>
@@ -88,7 +112,7 @@ export const HeroSection = () => {
 
             {/* Search Button */}
             <div
-              className="position-absolute  text-center"
+              className="position-absolute text-center"
               style={{
                 top: "50%",
                 right: "0px",
@@ -96,10 +120,30 @@ export const HeroSection = () => {
                 transform: "translate(50%, -50%)"
               }}
             >
-              <button className="btn btn-primary rounded-circle ">
+              <button
+                className="btn btn-primary rounded-circle"
+                onClick={toggleInputs}
+              >
                 <i className="bi bi-search fs-5 text-white"></i>
               </button>
             </div>
+
+            {/* Toggle Icon for Mobile */}
+            {showMessage && (
+              <div
+                className="d-sm-none position-absolute"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  zIndex: 2,
+                  transform: "translate(-50%, -50%)"
+                }}
+              >
+                <p className="mt-2 opacity-75" style={{ cursor: "pointer" }}>
+                  Click on for search <i className="bi bi-arrow-right"></i>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

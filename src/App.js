@@ -15,6 +15,7 @@ import HotelGrid from "./pages/HotelGrid";
 import RoomDetail from "./pages/RoomDetail";
 import HotelDetail from "./pages/HotelDetail";
 import HotelBooking from "./pages/HotelBooking";
+import HotelResort from "./pages/HotelResort";
 
 function App() {
   return (
@@ -25,14 +26,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/booking-web" element={<Home />} />
-          {/* Use named import for About page */}
+
           <Route path="/about" element={<About />} />
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelgrid" element={<HotelGrid />} />
           <Route path="/hoteldetail" element={<HotelDetail />} />
           <Route path="/roomdetail" element={<RoomDetail />} />
           <Route path="/hotelbooking" element={<HotelBooking />} />
-          {/* Add more routes as needed */}
+          <Route path="/hotelresort" element={<HotelResort />} />
         </Routes>
         <BackToTop />
         <Footer />
