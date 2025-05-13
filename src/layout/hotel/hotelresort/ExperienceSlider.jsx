@@ -3,12 +3,12 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image01 from "../../assets/img/hotelresort/01 (1).jpg";
-import Image02 from "../../assets/img/hotelresort/02.jpg";
-import Image04 from "../../assets/img/hotelresort/04.jpg";
-import Image05 from "../../assets/img/hotelresort/05.jpg";
-import Image06 from "../../assets/img/hotelresort/06.jpg";
-import Image07 from "../../assets/img/hotelresort/07.jpg";
+import Image01 from "../../../assets/img/hotelresort/01 (1).jpg";
+import Image02 from "../../../assets/img/hotelresort/02.jpg";
+import Image04 from "../../../assets/img/hotelresort/04.jpg";
+import Image05 from "../../../assets/img/hotelresort/05.jpg";
+import Image06 from "../../../assets/img/hotelresort/06.jpg";
+import Image07 from "../../../assets/img/hotelresort/07.jpg";
 
 const sliderData = [
   {

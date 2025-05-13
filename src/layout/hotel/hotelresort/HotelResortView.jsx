@@ -1,5 +1,5 @@
 import React from "react";
-import Image01 from "../../assets/img/hotelresort/01.jpg";
+import Image01 from "../../../assets/img/hotelresort/01.jpg";
 import TributeSection from "./TributeSection";
 import ExperienceSlider from "./ExperienceSlider";
 import FavoriteRoomsSlider from "./FavoriteRoomsSlider";

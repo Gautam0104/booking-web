@@ -1,5 +1,5 @@
 import React from "react";
-import HotelResortView from "../layout/hotelresort/HotelResortView";
+import HotelResortView from "../layout/hotel/hotelresort/HotelResortView";
 
 const HotelResort = () => {
   return (

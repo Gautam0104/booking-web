@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { tns } from "tiny-slider/src/tiny-slider";
 import "tiny-slider/dist/tiny-slider.css";
 import { Link } from "react-router-dom";
-import Image08 from "../../assets/img/hotelresort/08.jpg";
-import Image09 from "../../assets/img/hotelresort/09.jpg";
-import Image10 from "../../assets/img/hotelresort/10.jpg";
+import Image08 from "../../../assets/img/hotelresort/08.jpg";
+import Image09 from "../../../assets/img/hotelresort/09.jpg";
+import Image10 from "../../../assets/img/hotelresort/10.jpg";
 
 const rooms = [
   {

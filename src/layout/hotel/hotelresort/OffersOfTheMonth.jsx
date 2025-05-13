@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Offer02 from "../../assets/img/offer/02.jpg";
-import Offer03 from "../../assets/img/offer/03.jpg";
-import Offer07 from "../../assets/img/offer/07.jpg";
-import Offer04 from "../../assets/img/offer/04.jpg";
-import Offer06 from "../../assets/img/offer/06.jpg";
+import Offer02 from "../../../assets/img/offer/02.jpg";
+import Offer03 from "../../../assets/img/offer/03.jpg";
+import Offer07 from "../../../assets/img/offer/07.jpg";
+import Offer04 from "../../../assets/img/offer/04.jpg";
+import Offer06 from "../../../assets/img/offer/06.jpg";
 
 const OffersOfTheMonth = () => {
   const offers = [

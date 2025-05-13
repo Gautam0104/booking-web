@@ -95,6 +95,11 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
+                      <Link className="dropdown-item" to="/hotelchain">
+                        Hotel Chain
+                      </Link>
+                    </li>
+                    <li>
                       <Link className="dropdown-item" to="/hotelbooking">
                         Hotel Booking
                       </Link>
