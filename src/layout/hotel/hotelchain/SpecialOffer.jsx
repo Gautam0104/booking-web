@@ -56,7 +56,7 @@ const SpecialOffer = () => {
 
   return (
     <div className="py-5 px-3 my-5">
-      <div className="container-fluid">
+      <div className="container">
         <h2 className="text-center mb-4 text-white">Special Offers</h2>
         <Slider {...settings}>
           {sliderData.map((item, index) => (

@@ -3,6 +3,7 @@ import Image01 from "../../../assets/img/hotelresort/01.jpg";
 import SpecialOffer from "./SpecialOffer";
 import ExploreNearby from "../../../components/ExploreNearby";
 import PreciousMoment from "./PreciousMoment";
+import HotelSection from "./HotelSection";
 
 const HotelChainView = () => {
   return (
@@ -47,7 +48,9 @@ const HotelChainView = () => {
           </div>
         </div>
       </div>
+
       <SpecialOffer />
+      <HotelSection />
       <ExploreNearby />
       <PreciousMoment />
     </div>
