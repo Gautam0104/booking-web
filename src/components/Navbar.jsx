@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
-import {
-  FaPlane,
-  FaGlobe,
-  FaCar,
-  FaHotel,
-  FaBell,
-  FaEllipsisH
-} from "react-icons/fa";
+import { FaPlane, FaHotel, FaBell, FaEllipsisH } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleToggle = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3 py-4">
       <div className="container">
@@ -26,17 +29,15 @@ const Navbar = () => {
         </div>
 
         {/* Toggler */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-        >
-          <span className="navbar-toggler-icon"></span>
+        <button className="navbar-toggler" type="button" onClick={handleToggle}>
+          <span className="text-white fs-3">{menuOpen ? "×" : "☰"}</span>
         </button>
 
         {/* Navbar content */}
-        <div className="collapse navbar-collapse" id="navbarContent">
+        <div
+          className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}
+          id="navbarContent"
+        >
           {/* Left links */}
           <ul className="navbar-nav me-auto mt-3 mt-lg-0 d-flex align-items-lg-center gap-lg-3">
             {/* Listings Dropdown */}
@@ -66,60 +67,90 @@ const Navbar = () => {
                     </span>
                   </Link>
                   <ul
-                    className="dropdown-menu shadow rounded-3  px-2 "
-                    style={{ width: "250px", marginLeft: "10px" }}
+                    className="dropdown-menu shadow rounded-3  px-2"
+                    style={{ width: "250px", marginLeft: "8px" }}
                   >
                     <li>
-                      <Link className="dropdown-item" to="/hotellist">
+                      <Link
+                        className="dropdown-item"
+                        to="/hotellist"
+                        onClick={closeMenu}
+                      >
                         Hotel List
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/hotelgrid">
+                      <Link
+                        className="dropdown-item"
+                        to="/hotelgrid"
+                        onClick={closeMenu}
+                      >
                         Hotel Grid
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/hoteldetail">
+                      <Link
+                        className="dropdown-item"
+                        to="/hoteldetail"
+                        onClick={closeMenu}
+                      >
                         Hotel Detail
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/roomdetail">
+                      <Link
+                        className="dropdown-item"
+                        to="/roomdetail"
+                        onClick={closeMenu}
+                      >
                         Room Detail
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/hotelresort">
+                      <Link
+                        className="dropdown-item"
+                        to="/hotelresort"
+                        onClick={closeMenu}
+                      >
                         Hotel Resort
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/hotelchain">
+                      <Link
+                        className="dropdown-item"
+                        to="/hotelchain"
+                        onClick={closeMenu}
+                      >
                         Hotel Chain
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/hotelbooking">
+                      <Link
+                        className="dropdown-item"
+                        to="/hotelbooking"
+                        onClick={closeMenu}
+                      >
                         Hotel Booking
                       </Link>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/apartments">
-                    <span className="d-flex align-items-center justify-content-between">
-                      Apartments
-                      <FaEllipsisH />
-                    </span>
+                  <Link
+                    className="dropdown-item"
+                    to="/apartments"
+                    onClick={closeMenu}
+                  >
+                    Apartments <FaEllipsisH />
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/tours">
-                    <span className="d-flex align-items-center justify-content-between">
-                      Tours
-                      <FaEllipsisH />
-                    </span>
+                  <Link
+                    className="dropdown-item"
+                    to="/tours"
+                    onClick={closeMenu}
+                  >
+                    Tours <FaEllipsisH />
                   </Link>
                 </li>
               </ul>
@@ -134,11 +165,10 @@ const Navbar = () => {
               >
                 Pages
               </Link>
-              {/* Add submenu if needed */}
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="/" onClick={closeMenu}>
                 Home
               </Link>
             </li>
@@ -152,11 +182,10 @@ const Navbar = () => {
               >
                 Accounts
               </Link>
-              {/* Add submenu if needed */}
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/more">
+              <Link className="nav-link" to="/more" onClick={closeMenu}>
                 <FaEllipsisH />
               </Link>
             </li>
@@ -171,21 +200,6 @@ const Navbar = () => {
               <FaHotel className="me-2" />
               Hotel
             </button>
-
-            <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3 text-white">
-              <div className="d-flex align-items-center gap-2">
-                <FaPlane />
-                <span>Flight</span>
-              </div>
-              <div className="d-flex align-items-center gap-2">
-                <FaGlobe />
-                <span>Tour</span>
-              </div>
-              <div className="d-flex align-items-center gap-2">
-                <FaCar />
-                <span>Cab</span>
-              </div>
-            </div>
 
             <div className="position-relative">
               <button className="btn btn-dark p-2 rounded-circle">

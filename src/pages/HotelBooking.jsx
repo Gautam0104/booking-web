@@ -217,50 +217,16 @@ const HotelBooking = () => {
                         <h6 className="mb-0">Main Guest</h6>
                       </div>
                     </div>
-                    <div className="col-md-2">
-                      <div className="form-size-lg">
-                        <label className="form-label">Title</label>
-                        <div className="choices">
-                          <div className="choices__inner">
-                            <select
-                              className="form-select form-select-lg js-choice choices__input bg-dark text-white border-secondary"
-                              hidden=""
-                              tabindex="-1"
-                              data-choice="active"
-                            >
-                              <option
-                                value="Mr"
-                                data-custom-properties="[object Object]"
-                              >
-                                Mr
-                              </option>
-                              <option
-                                value="Mrs"
-                                data-custom-properties="[object Object]"
-                              >
-                                Mrs
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-5">
-                      <label className="form-label">First Name</label>
+
+                    <div className="col-md-12">
+                      <label className="form-label">Name</label>
                       <input
                         type="text"
                         className="form-control form-control-lg bg-dark text-white border-secondary"
                         placeholder="Enter your name"
                       />
                     </div>
-                    <div class="col-md-5">
-                      <label className="form-label">Last Name</label>
-                      <input
-                        type="text"
-                        className="form-control form-control-lg bg-dark text-white border-secondary"
-                        placeholder="Enter your name"
-                      />
-                    </div>
+
                     <div class="col-12 text-start">
                       <Link className="btn nav-link mb-0 p-0 text-primary text-start">
                         <i class="fa-solid fa-plus me-2"></i>Add New Guest

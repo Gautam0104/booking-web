@@ -57,13 +57,13 @@ export const HeroSection = () => {
               }`}
             >
               <label className="form-label opacity-50">Location</label>
-              <div className="input-group">
+              <div className="input-group ">
                 <span className="input-group-text bg-transparent text-white border-secondary">
                   <i className="bi bi-geo-alt-fill"></i>
                 </span>
                 <input
                   type="text"
-                  className="form-control bg-dark text-white border-secondary"
+                  className="form-control bg-dark text-white border-secondary me-2"
                   value="San Jacinto, USA"
                   readOnly
                 />
@@ -83,7 +83,7 @@ export const HeroSection = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-control bg-dark text-white border-secondary"
+                  className="form-control bg-dark text-white border-secondary me-2"
                   value="19 Sep to 28 Sep"
                   readOnly
                 />
@@ -139,8 +139,15 @@ export const HeroSection = () => {
                   transform: "translate(-50%, -50%)"
                 }}
               >
-                <p className="mt-2 opacity-75" style={{ cursor: "pointer" }}>
-                  Click on for search <i className="bi bi-arrow-right"></i>
+                <p
+                  className="mt-3 opacity-75 d-flex"
+                  style={{ cursor: "pointer" }}
+                >
+                  Click here{" "}
+                  <i
+                    className="bi bi-arrow-right ms-1"
+                    style={{ marginTop: "2px" }}
+                  ></i>
                 </p>
               </div>
             )}

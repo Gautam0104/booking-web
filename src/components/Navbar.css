@@ -13,7 +13,6 @@
 /* Enable hover dropdown */
 .navbar .dropdown:hover>.dropdown-menu {
   display: block;
-  margin-top: 0.5rem;
   animation: fadeIn 0.2s ease-in-out;
 }
 
