@@ -68,7 +68,7 @@ const Navbar = () => {
                   </Link>
                   <ul
                     className="dropdown-menu shadow rounded-3  px-2"
-                    style={{ width: "250px", marginLeft: "8px" }}
+                    style={{ width: "250px", marginLeft: "6px" }}
                   >
                     <li>
                       <Link
@@ -141,7 +141,9 @@ const Navbar = () => {
                     to="/apartments"
                     onClick={closeMenu}
                   >
-                    Apartments <FaEllipsisH />
+                    <span className="d-flex align-items-center justify-content-between">
+                      Apartments <FaEllipsisH />
+                    </span>
                   </Link>
                 </li>
                 <li>
@@ -150,8 +152,45 @@ const Navbar = () => {
                     to="/tours"
                     onClick={closeMenu}
                   >
-                    Tours <FaEllipsisH />
+                    <span className="d-flex align-items-center justify-content-between">
+                      Tours <FaEllipsisH />
+                    </span>
                   </Link>
+                </li>
+                <li className="dropdown-submenu dropend">
+                  <Link
+                    className="dropdown-item"
+                    to="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    <span className="d-flex align-items-center justify-content-between">
+                      Blog <FaEllipsisH />
+                    </span>
+                  </Link>
+                  <ul
+                    className="dropdown-menu shadow rounded-3  px-2"
+                    style={{ width: "250px", marginLeft: "6px" }}
+                  >
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/blog"
+                        onClick={closeMenu}
+                      >
+                        Blog
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/blogdetail"
+                        onClick={closeMenu}
+                      >
+                        Blog Detail
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>

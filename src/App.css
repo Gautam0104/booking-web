@@ -94,3 +94,9 @@
 .image-hover-container:hover .popup-icon {
   opacity: 1;
 }
+
+
+.white-placeholder::placeholder {
+  color: white;
+  opacity: 1;
+}

@@ -12,7 +12,7 @@
 
 /* Enable hover dropdown */
 .navbar .dropdown:hover>.dropdown-menu {
-  display: block;
+  display: block !important;
   animation: fadeIn 0.2s ease-in-out;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .dropdown-submenu:hover>.dropdown-menu {
-  display: block;
+  display: block !important;
   top: 0;
   left: 100%;
   margin-top: 0;
@@ -45,6 +45,7 @@
   color: #ffffff;
   border: none;
   padding: 0.5rem 0;
+  z-index: 1050;
 }
 
 /* Light color for dropdown items */

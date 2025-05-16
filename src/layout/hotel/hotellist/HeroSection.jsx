@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/dark.css";
+import "flatpickr/dist/flatpickr.css";
 import Image01 from "../../../assets/img/hotellist/01.jpg";
 
 export const HeroSection = () => {
@@ -7,11 +11,38 @@ export const HeroSection = () => {
   const [showMessage, setShowMessage] = useState(true); // Show message initially
 
   const toggleInputs = () => {
+    handleSearch();
     setShowInputs((prev) => {
       const next = !prev;
       setShowMessage(!next); // Hide message when inputs are shown
       return next;
     });
+  };
+  const [location, setLocation] = useState("");
+  const [dateRange, setDateRange] = useState([]);
+  const [adults, setAdults] = useState(2);
+  const [children, setChildren] = useState(0);
+  const [rooms, setRooms] = useState(1);
+
+  const navigate = useNavigate();
+
+  const handleGuestSummary = () => {
+    return `${adults + children} Guests ${rooms} Room${rooms > 1 ? "s" : ""}`;
+  };
+
+  const handleSearch = () => {
+    if (!location || dateRange.length < 2) {
+      alert("Please select location and check-in/check-out dates");
+      return;
+    }
+
+    const guests = adults + children;
+    const checkin = dateRange[0]?.toISOString().split("T")[0];
+    const checkout = dateRange[1]?.toISOString().split("T")[0];
+
+    navigate(
+      `/hotellist?location=${location}&checkin=${checkin}&checkout=${checkout}&guests=${guests}&rooms=${rooms}`
+    );
   };
 
   return (
@@ -61,12 +92,18 @@ export const HeroSection = () => {
                 <span className="input-group-text bg-transparent text-white border-secondary">
                   <i className="bi bi-geo-alt-fill"></i>
                 </span>
-                <input
-                  type="text"
-                  className="form-control bg-dark text-white border-secondary me-2"
-                  value="San Jacinto, USA"
-                  readOnly
-                />
+                <select
+                  className="form-control bg-dark border-0 text-white white-placeholder me-2"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Select location
+                  </option>
+                  <option value="lucknow">Lucknow</option>
+                  <option value="delhi">Delhi</option>
+                  <option value="mumbai">Mumbai</option>
+                </select>
               </div>
             </div>
 
@@ -81,11 +118,12 @@ export const HeroSection = () => {
                 <span className="input-group-text bg-transparent text-white border-secondary">
                   <i className="bi bi-calendar-range-fill"></i>
                 </span>
-                <input
-                  type="text"
-                  className="form-control bg-dark text-white border-secondary me-2"
-                  value="19 Sep to 28 Sep"
-                  readOnly
+                <Flatpickr
+                  options={{ mode: "range", dateFormat: "d M" }}
+                  className="form-control bg-dark text-white border-0 white-placeholder me-2"
+                  placeholder="Select date"
+                  value={dateRange}
+                  onChange={(date) => setDateRange(date)}
                 />
               </div>
             </div>
@@ -103,10 +141,84 @@ export const HeroSection = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-control bg-dark text-white border-secondary"
-                  value="2 Guests 1 Room"
+                  className="form-control selection-result bg-dark text-white border-0 rounded-1"
+                  value={handleGuestSummary()}
                   readOnly
+                  data-bs-toggle="dropdown"
                 />
+                <ul className="dropdown-menu guest-selector-dropdown text-white p-4 shadow">
+                  <li className="d-flex justify-content-between">
+                    <div>
+                      <h6 className="mb-0">Adults</h6>
+                      <small>Ages 13 or above</small>
+                    </div>
+                    <div className="hstack gap-1 align-items-center">
+                      <button
+                        type="button"
+                        className="btn btn-link p-0 ms-4"
+                        onClick={() => setAdults(Math.max(1, adults - 1))}
+                      >
+                        <i className="bi bi-dash-circle fs-5"></i>
+                      </button>
+                      <h6 className="mb-0">{adults}</h6>
+                      <button
+                        type="button"
+                        className="btn btn-link p-0"
+                        onClick={() => setAdults(adults + 1)}
+                      >
+                        <i className="bi bi-plus-circle fs-5"></i>
+                      </button>
+                    </div>
+                  </li>
+                  <li className="dropdown-divider"></li>
+                  <li className="d-flex justify-content-between">
+                    <div>
+                      <h6 className="mb-0">Child</h6>
+                      <small>Ages 13 below</small>
+                    </div>
+                    <div className="hstack gap-1 align-items-center">
+                      <button
+                        type="button"
+                        className="btn btn-link p-0"
+                        onClick={() => setChildren(Math.max(0, children - 1))}
+                      >
+                        <i className="bi bi-dash-circle fs-5"></i>
+                      </button>
+                      <h6 className="mb-0">{children}</h6>
+                      <button
+                        type="button"
+                        className="btn btn-link p-0"
+                        onClick={() => setChildren(children + 1)}
+                      >
+                        <i className="bi bi-plus-circle fs-5"></i>
+                      </button>
+                    </div>
+                  </li>
+                  <li className="dropdown-divider"></li>
+                  <li className="d-flex justify-content-between">
+                    <div>
+                      <h6 className="mb-0">Rooms</h6>
+                      <small>Max room 8</small>
+                    </div>
+                    <div className="hstack gap-1 align-items-center">
+                      <button
+                        type="button"
+                        className="btn btn-link p-0"
+                        onClick={() => setRooms(Math.max(1, rooms - 1))}
+                      >
+                        <i className="bi bi-dash-circle fs-5"></i>
+                      </button>
+                      <h6 className="mb-0">{rooms}</h6>
+                      <button
+                        type="button"
+                        className="btn btn-link p-0"
+                        onClick={() => setRooms(Math.min(8, rooms + 1))}
+                      >
+                        <i className="bi bi-plus-circle fs-5"></i>
+                      </button>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
 

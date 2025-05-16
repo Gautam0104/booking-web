@@ -1,82 +1,103 @@
 import React from "react";
-import Image04 from "../../../assets/img/hotellist/04.jpg";
-import Image11 from "../../../assets/img/hotellist/11.jpg";
-import Image12 from "../../../assets/img/hotellist/12.jpg";
-import Image08 from "../../../assets/img/hotellist/08.jpg";
+import { useLocation, useNavigate } from "react-router-dom";
+import queryString from "query-string"; // To parse query params
+
+// Import images...
+import Image04 from "../../../assets/img/hotellist/hyatt.jpeg";
+import Image11 from "../../../assets/img/hotellist/tajmahal.jpeg";
+import Image12 from "../../../assets/img/hotellist/novetel.jpeg";
+import Image08 from "../../../assets/img/hotellist/renaissance.jpeg";
+import Image05 from "../../../assets/img/hotellist/vintclub.jpeg";
 
 export const HotelListView = () => {
+  const location = useLocation();
+  const { location: queryLocation } = queryString.parse(location.search); // e.g., ?location=California
+
   const hotelData = [
     {
       id: 1,
-      name: "Courtyard by Marriott New York",
-      location: "5855 W Century Blvd, Los Angeles - 90045",
+      name: "Hyatt Regency Lucknow",
+      location: "Lucknow",
       image: Image04,
       rating: 5,
       amenities: ["Air Conditioning", "Wifi", "Kitchen", "More+"],
       cancellation: "Free Cancellation till 7 Jan 2022",
       breakfast: "Free Breakfast",
-      price: 750,
-      oldPrice: 1000,
-      discount: "30% Off",
+      price: 5215,
+      oldPrice: null,
+      discount: null,
       refundable: true
     },
     {
       id: 2,
-      name: "Pride moon Village Resort & Spa",
-      location: "31J W Spark Street, California - 24578",
+      name: "Novetel Lucknow Gomti Nagar Hotel",
+      location: "Lucknow",
       image: Image12,
       rating: 4,
       amenities: ["Air Conditioning", "Wifi", "Kitchen", "Pool"],
       cancellation: "Non Refundable",
       breakfast: null,
-      price: 980,
+      price: 4728,
       oldPrice: null,
       discount: null,
       refundable: false
     },
     {
       id: 3,
-      name: "Royal Beach Resort",
-      location: "Manhattan street, London - 24578",
+      name: "Taj Mahal Lucknow",
+      location: "Lucknow",
       image: Image11,
       rating: 4,
       amenities: ["Air Conditioning", "Wifi", "Kitchen", "Pool"],
       cancellation: "Free Cancellation till 7 Jan 2022",
       breakfast: "Free Breakfast",
-      price: 540,
+      price: 10700,
       oldPrice: null,
       discount: null,
       refundable: true
     },
     {
       id: 4,
-      name: "Park Plaza Lodge Hotel",
-      location: "5855 W Century Blvd, Los Angeles - 90045",
+      name: "Renaissance Lucknow Hotel",
+      location: "Lucknow",
       image: Image08,
       rating: 4,
       amenities: ["Air Conditioning", "Wifi", "Kitchen", "Pool"],
       cancellation: "Free Cancellation till 7 Jan 2022",
       breakfast: "Free Breakfast",
-      price: 885,
+      price: 6385,
       oldPrice: null,
       discount: null,
       refundable: true
     },
     {
       id: 5,
-      name: "Beverly Hills Marriott",
-      location: "31J W Spark Street, California - 24578",
-      image: Image12,
+      name: "Vintclub Resort",
+      location: "Lucknow",
+      image: Image05,
       rating: 4,
       amenities: ["Air Conditioning", "Wifi", "Kitchen", "Pool"],
       cancellation: "Free Cancellation till 7 Jan 2022",
       breakfast: "Free Breakfast",
-      price: 980,
+      price: 10610,
       oldPrice: null,
       discount: null,
       refundable: true
     }
   ];
+
+  const currencySymbol = "₹";
+  const navigate = useNavigate();
+  const selectRoom = () => {
+    navigate(`/roomdetail`);
+  };
+
+  // Filter hotels by query param "location"
+  const filteredHotels = queryLocation
+    ? hotelData.filter((hotel) =>
+        hotel.location.toLowerCase().includes(queryLocation.toLowerCase())
+      )
+    : hotelData;
 
   const renderFilters = () => (
     <>
@@ -334,7 +355,7 @@ export const HotelListView = () => {
 
           {/* Hotel Cards */}
           <div className="col-md-9">
-            {hotelData.map((hotel) => (
+            {filteredHotels.map((hotel) => (
               <div
                 className="card text-white mb-4 rounded-4 overflow-hidden position-relative"
                 style={{ backgroundColor: "#191b1d" }}
@@ -398,7 +419,10 @@ export const HotelListView = () => {
                       </div>
                       <div className="d-flex justify-content-between align-items-center mt-3">
                         <div>
-                          <span className="fw-bold fs-5">${hotel.price}</span>
+                          <span className="fw-bold fs-5">
+                            {currencySymbol}
+                            {hotel.price}
+                          </span>
                           {hotel.oldPrice && (
                             <span className="text-decoration-line-through text-white-50 ms-2">
                               ${hotel.oldPrice}
@@ -406,7 +430,10 @@ export const HotelListView = () => {
                           )}
                           <span className="small text-white-50"> /day</span>
                         </div>
-                        <button className="btn btn-outline-light">
+                        <button
+                          className="btn btn-outline-light"
+                          onClick={selectRoom}
+                        >
                           Select Room
                         </button>
                       </div>

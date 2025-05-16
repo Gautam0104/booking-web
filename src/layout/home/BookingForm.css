@@ -1,0 +1,36 @@
+.booking-form-container {
+
+    background-color: #1e1e1e;
+    /* Dark background */
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 20px;
+
+}
+
+.form-block {
+    min-width: 200px;
+}
+
+.form-control {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.form-label {
+    font-size: 0.75rem;
+    color: #ccc;
+}
+
+.btn-purple {
+    background-color: #8e44ec;
+    width: 48px;
+    height: 48px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-purple:hover {
+    background-color: #732dca;
+}

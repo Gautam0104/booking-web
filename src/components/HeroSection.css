@@ -39,9 +39,7 @@
         /* Adjust position for very small screens */
     }
 
-    .right-section {
-        /* margin: 10px !important; */
-    }
+
 
     .guide-support-box {
         top: 0 !important;
@@ -98,4 +96,72 @@
 
 
     }
+}
+
+.white-placeholder::placeholder {
+    color: white !important;
+    opacity: 1;
+}
+
+select.white-placeholder:invalid {
+    color: white;
+}
+
+.flatpickr-calendar {
+    background-color: #191b1d !important;
+    border: 1px solid #333 !important;
+}
+
+.flatpickr-day,
+.flatpickr-weekday {
+    color: #fff !important;
+}
+
+.flatpickr-day:hover {
+    background-color: #444 !important;
+}
+
+.flatpickr-day.selected {
+    background-color: #8e85e6 !important;
+    color: #fff !important;
+}
+
+/* Month and Year Header Text */
+.flatpickr-current-month {
+    color: white !important;
+}
+
+/* Month dropdown text */
+.flatpickr-monthDropdown-months {
+    background-color: #15151e !important;
+    color: white !important;
+}
+
+/* Year input text */
+.flatpickr-current-month input.cur-year {
+    color: white !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* Style the previous and next month navigation arrows */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    color: white !important;
+    fill: white !important;
+    /* for SVG icons */
+}
+
+/* Optional: change on hover */
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+    color: #0d6efd !important;
+    /* Bootstrap primary */
+    fill: #0d6efd !important;
+}
+
+select option:checked {
+    background-color: #8e85e6;
+    /* Bootstrap primary */
+    color: white;
 }

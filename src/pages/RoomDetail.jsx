@@ -4,6 +4,7 @@ import Image11 from "../assets/img/roomdetail/11.jpg";
 import Image12 from "../assets/img/roomdetail/12.jpg";
 import Image13 from "../assets/img/roomdetail/13.jpg";
 import Image14 from "../assets/img/roomdetail/14.jpg";
+import RoomSelection from "../layout/hotel/roomdetail/RoomSelection";
 
 const RoomDetail = () => {
   return (
@@ -77,6 +78,7 @@ const RoomDetail = () => {
           ></span>
         </button>
       </div>
+      <RoomSelection />
     </div>
   );
 };
