@@ -72,12 +72,16 @@ const SearchBox = () => {
             <FaCalendarAlt />
           </span>
           <Flatpickr
-            options={{ mode: "range", dateFormat: "d M" }}
-            className="form-control bg-dark text-white border-0 white-placeholder"
-            placeholder="Select date"
-            value={dateRange}
-            onChange={(date) => setDateRange(date)}
-          />
+      options={{
+        mode: "range",
+        dateFormat: "d M",
+        allowInput: true,
+      }}
+      className="form-control bg-dark text-white border-0 white-placeholder"
+      placeholder="Select date range"
+      value={dateRange}
+      onChange={(selectedDates) => setDateRange(selectedDates)}
+    />
         </div>
 
         <div className="input-group text-white">
@@ -219,7 +223,7 @@ const SearchBox = () => {
               className="form-control bg-dark text-white border-0 white-placeholder"
               placeholder="Select date"
               value={dateRange}
-              onChange={(date) => setDateRange(date)}
+              onChange={(dates) => setDateRange(dates)}
             />
           </div>
         </div>

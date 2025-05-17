@@ -13,10 +13,9 @@ function App() {
   return (
     <div className="App" style={{ backgroundColor: "#212529" }}>
       <Router>
-        <Navbar />
+       
         <AppRoutes />
-        <BackToTop />
-        <Footer />
+       
       </Router>
     </div>
   );

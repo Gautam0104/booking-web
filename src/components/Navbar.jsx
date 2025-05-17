@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import { FaPlane, FaHotel, FaBell, FaEllipsisH } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,12 +16,16 @@ const Navbar = () => {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+  const navigate = useNavigate();
 
+  const naviHome = () =>{
+    navigate(`/dashboard/home`)
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3 py-4">
       <div className="container">
         {/* Logo */}
-        <div className="d-flex align-items-center gap-2">
+        <div className="d-flex align-items-center gap-2" onClick={naviHome}>
           <div
             className="rounded-circle d-flex align-items-center justify-content-center"
             style={{ backgroundColor: "#5B3DF5", width: 40, height: 40 }}
@@ -73,7 +80,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/hotellist"
+                        to="/dashboard/hotellist"
                         onClick={closeMenu}
                       >
                         Hotel List
@@ -82,7 +89,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/hotelgrid"
+                        to="/dashboard/hotelgrid"
                         onClick={closeMenu}
                       >
                         Hotel Grid
@@ -91,7 +98,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/hoteldetail"
+                        to="/dashboard/hoteldetail"
                         onClick={closeMenu}
                       >
                         Hotel Detail
@@ -100,7 +107,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/roomdetail"
+                        to="/dashboard/roomdetail"
                         onClick={closeMenu}
                       >
                         Room Detail
@@ -109,7 +116,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/hotelresort"
+                        to="/dashboard/hotelresort"
                         onClick={closeMenu}
                       >
                         Hotel Resort
@@ -118,7 +125,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/hotelchain"
+                        to="/dashboard/hotelchain"
                         onClick={closeMenu}
                       >
                         Hotel Chain
@@ -127,7 +134,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/hotelbooking"
+                        to="/dashboard/hotelbooking"
                         onClick={closeMenu}
                       >
                         Hotel Booking
@@ -138,7 +145,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     className="dropdown-item"
-                    to="/apartments"
+                    to="/dashboard/apartments"
                     onClick={closeMenu}
                   >
                     <span className="d-flex align-items-center justify-content-between">
@@ -149,7 +156,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     className="dropdown-item"
-                    to="/tours"
+                    to="/dashboard/tours"
                     onClick={closeMenu}
                   >
                     <span className="d-flex align-items-center justify-content-between">
@@ -175,7 +182,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/blog"
+                        to="/dashboard/blog"
                         onClick={closeMenu}
                       >
                         Blog
@@ -184,7 +191,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/blogdetail"
+                        to="/dashboard/blogdetail"
                         onClick={closeMenu}
                       >
                         Blog Detail
@@ -206,11 +213,7 @@ const Navbar = () => {
               </Link>
             </li>
 
-            <li className="nav-item">
-              <Link className="nav-link" to="/" onClick={closeMenu}>
-                Home
-              </Link>
-            </li>
+            
 
             <li className="nav-item dropdown">
               <Link
@@ -241,7 +244,7 @@ const Navbar = () => {
             </button>
 
             <div className="position-relative">
-              <button className="btn btn-dark p-2 rounded-circle">
+              <button className="btn btn-dark  rounded-circle">
                 <FaBell />
               </button>
               <span className="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>

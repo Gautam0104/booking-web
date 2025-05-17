@@ -89,7 +89,7 @@ export const HeroSection = () => {
             >
               <label className="form-label opacity-50">Location</label>
               <div className="input-group ">
-                <span className="input-group-text bg-transparent text-white border-secondary">
+                <span className="input-group-text bg-dark border-0 text-white">
                   <i className="bi bi-geo-alt-fill"></i>
                 </span>
                 <select
@@ -115,7 +115,7 @@ export const HeroSection = () => {
             >
               <label className="form-label opacity-50">Check in – out</label>
               <div className="input-group">
-                <span className="input-group-text bg-transparent text-white border-secondary">
+                <span className="input-group-text bg-dark border-0 text-white">
                   <i className="bi bi-calendar-range-fill"></i>
                 </span>
                 <Flatpickr
@@ -136,7 +136,7 @@ export const HeroSection = () => {
             >
               <label className="form-label opacity-50">Guests & rooms</label>
               <div className="input-group">
-                <span className="input-group-text bg-transparent text-white border-secondary">
+                <span className="input-group-text bg-dark border-0 text-white">
                   <i className="bi bi-person-fill"></i>
                 </span>
                 <input

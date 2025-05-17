@@ -11,24 +11,30 @@ import HotelResort from "../pages/HotelResort";
 import HotelChain from "../pages/HotelChain";
 import Blog from "../pages/Blog";
 import List from "../components/List";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import Dashboard from "../pages/Dashboard";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/booking-web" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
 
-      <Route path="/about" element={<About />} />
-      <Route path="/hotellist" element={<HotelList />} />
-      <Route path="/hotelgrid" element={<HotelGrid />} />
-      <Route path="/hoteldetail" element={<HotelDetail />} />
-      <Route path="/roomdetail" element={<RoomDetail />} />
-      <Route path="/hotelbooking" element={<HotelBooking />} />
-      <Route path="/hotelresort" element={<HotelResort />} />
-      <Route path="/hotelchain" element={<HotelChain />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/apitest" element={<List />} />
+      <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="home" element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="hotellist" element={<HotelList />} />
+        <Route path="hotelgrid" element={<HotelGrid />} />
+        <Route path="hoteldetail" element={<HotelDetail />} />
+        <Route path="roomdetail" element={<RoomDetail />} />
+        <Route path="hotelbooking" element={<HotelBooking />} />
+        <Route path="hotelresort" element={<HotelResort />} />
+        <Route path="hotelchain" element={<HotelChain />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="apitest" element={<List />} />
+        <Route path="booking-web" element={<Home />} />
+      </Route>
     </Routes>
   );
 };

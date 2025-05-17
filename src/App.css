@@ -98,5 +98,9 @@
 
 .white-placeholder::placeholder {
   color: white;
-  opacity: 1;
+  opacity: .5;  
+}
+
+.custom-placeholder::placeholder {
+  color: rgba(255, 255, 255, 1); /* Lower opacity */
 }
