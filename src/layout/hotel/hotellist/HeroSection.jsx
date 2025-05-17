@@ -68,7 +68,7 @@ export const HeroSection = () => {
         {/* Foreground Content */}
         <div className="container py-5 position-relative" style={{ zIndex: 2 }}>
           <h1 className="display-4 fw-bold mb-4 text-center">
-            150 Hotels in New York
+            150 Hotels in India
           </h1>
           <div
             className="rounded-4 d-flex flex-wrap justify-content-between align-items-center shadow position-relative m-3"

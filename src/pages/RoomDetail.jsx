@@ -1,9 +1,6 @@
 import React from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import Image11 from "../assets/img/roomdetail/11.jpg";
-import Image12 from "../assets/img/roomdetail/12.jpg";
-import Image13 from "../assets/img/roomdetail/13.jpg";
-import Image14 from "../assets/img/roomdetail/14.jpg";
+
 import RoomSelection from "../layout/hotel/roomdetail/RoomSelection";
 
 const RoomDetail = () => {
@@ -12,7 +9,7 @@ const RoomDetail = () => {
       <h2 className="fw-bold text-white   ">Luxury Room with Balcony</h2>
       <p className="text-white opacity-75">
         <FaMapMarkerAlt className="me-2" />
-        5855 W Century Blvd, Los Angeles - 90045
+        Vibhuti Khand, Gomti Nagar
       </p>
 
       <div id="roomCarousel" className="carousel slide" data-bs-ride="carousel">
@@ -21,13 +18,13 @@ const RoomDetail = () => {
           <div className="carousel-item active">
             <div className="d-flex gap-3 justify-content-center">
               <img
-                src={Image11}
+                src="https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/e2babf65_b.jpg"
                 className="d-block rounded"
                 alt="Room"
                 style={{ width: "500px", height: "300px", objectFit: "cover" }}
               />
               <img
-                src={Image12}
+                src="https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/9d895b4d_b.jpg"
                 className="d-block rounded"
                 alt="Balcony"
                 style={{ width: "500px", height: "300px", objectFit: "cover" }}
@@ -39,13 +36,30 @@ const RoomDetail = () => {
           <div className="carousel-item">
             <div className="d-flex gap-3 justify-content-center">
               <img
-                src={Image13}
+                src="https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/65051724_b.jpg"
                 className="d-block rounded"
                 alt="Pool"
                 style={{ width: "500px", height: "300px", objectFit: "cover" }}
               />
               <img
-                src={Image14}
+                src="https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/15552c8e_b.jpg"
+                className="d-block rounded"
+                alt="Bedroom"
+                style={{ width: "500px", height: "300px", objectFit: "cover" }}
+              />
+            </div>
+          </div>
+          {/* Slide 3 (add more images if needed) */}
+          <div className="carousel-item">
+            <div className="d-flex gap-3 justify-content-center">
+              <img
+                src="https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/dc7f9f93_b.jpg"
+                className="d-block rounded"
+                alt="Pool"
+                style={{ width: "500px", height: "300px", objectFit: "cover" }}
+              />
+              <img
+                src="https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/b50de7f6_b.jpg"
                 className="d-block rounded"
                 alt="Bedroom"
                 style={{ width: "500px", height: "300px", objectFit: "cover" }}

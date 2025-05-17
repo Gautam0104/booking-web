@@ -10,6 +10,7 @@ import HotelBooking from "../pages/HotelBooking";
 import HotelResort from "../pages/HotelResort";
 import HotelChain from "../pages/HotelChain";
 import Blog from "../pages/Blog";
+import List from "../components/List";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
       <Route path="/hotelresort" element={<HotelResort />} />
       <Route path="/hotelchain" element={<HotelChain />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/apitest" element={<List />} />
     </Routes>
   );
 };

@@ -1,106 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import queryString from "query-string"; // To parse query params
-
-// Import images...
-import Image04 from "../../../assets/img/hotellist/hyatt.jpeg";
-import Image11 from "../../../assets/img/hotellist/tajmahal.jpeg";
-import Image12 from "../../../assets/img/hotellist/novetel.jpeg";
-import Image08 from "../../../assets/img/hotellist/renaissance.jpeg";
-import Image05 from "../../../assets/img/hotellist/vintclub.jpeg";
+import { fetchHotelsByLocation } from "../../../services/hotelService";
 
 export const HotelListView = () => {
-  const location = useLocation();
-  const { location: queryLocation } = queryString.parse(location.search); // e.g., ?location=California
+  const [hotels, setHotels] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const hotelsPerPage = 5;
 
-  const hotelData = [
-    {
-      id: 1,
-      name: "Hyatt Regency Lucknow",
-      location: "Lucknow",
-      image: Image04,
-      rating: 5,
-      amenities: ["Air Conditioning", "Wifi", "Kitchen", "More+"],
-      cancellation: "Free Cancellation till 7 Jan 2022",
-      breakfast: "Free Breakfast",
-      price: 5215,
-      oldPrice: null,
-      discount: null,
-      refundable: true
-    },
-    {
-      id: 2,
-      name: "Novetel Lucknow Gomti Nagar Hotel",
-      location: "Lucknow",
-      image: Image12,
-      rating: 4,
-      amenities: ["Air Conditioning", "Wifi", "Kitchen", "Pool"],
-      cancellation: "Non Refundable",
-      breakfast: null,
-      price: 4728,
-      oldPrice: null,
-      discount: null,
-      refundable: false
-    },
-    {
-      id: 3,
-      name: "Taj Mahal Lucknow",
-      location: "Lucknow",
-      image: Image11,
-      rating: 4,
-      amenities: ["Air Conditioning", "Wifi", "Kitchen", "Pool"],
-      cancellation: "Free Cancellation till 7 Jan 2022",
-      breakfast: "Free Breakfast",
-      price: 10700,
-      oldPrice: null,
-      discount: null,
-      refundable: true
-    },
-    {
-      id: 4,
-      name: "Renaissance Lucknow Hotel",
-      location: "Lucknow",
-      image: Image08,
-      rating: 4,
-      amenities: ["Air Conditioning", "Wifi", "Kitchen", "Pool"],
-      cancellation: "Free Cancellation till 7 Jan 2022",
-      breakfast: "Free Breakfast",
-      price: 6385,
-      oldPrice: null,
-      discount: null,
-      refundable: true
-    },
-    {
-      id: 5,
-      name: "Vintclub Resort",
-      location: "Lucknow",
-      image: Image05,
-      rating: 4,
-      amenities: ["Air Conditioning", "Wifi", "Kitchen", "Pool"],
-      cancellation: "Free Cancellation till 7 Jan 2022",
-      breakfast: "Free Breakfast",
-      price: 10610,
-      oldPrice: null,
-      discount: null,
-      refundable: true
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const location = queryParams.get("location");
+
+  useEffect(() => {
+    const getHotels = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await fetchHotelsByLocation(location);
+        console.log("Fetched hotels:", data);
+        setHotels(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (location) {
+      getHotels();
     }
-  ];
+  }, [location]);
+
+  const navigate = useNavigate();
+
+  if (loading) return <p className="text-white">Loading hotels...</p>;
+  if (error) return <p className="text-white">{error}</p>;
+  if (hotels.length === 0)
+    return <p className="text-white">No hotels found for this search.</p>;
 
   const currencySymbol = "₹";
-  const navigate = useNavigate();
   const selectRoom = () => {
-    navigate(`/roomdetail`);
+    navigate(`/roomdetail?index=0&location=${location}`);
   };
 
-  // Filter hotels by query param "location"
-  const filteredHotels = queryLocation
-    ? hotelData.filter((hotel) =>
-        hotel.location.toLowerCase().includes(queryLocation.toLowerCase())
-      )
-    : hotelData;
+  // Pagination logic
+  const totalPages = Math.ceil(hotels.length / hotelsPerPage);
+  const startIndex = (currentPage - 1) * hotelsPerPage;
+  const currentHotels = hotels.slice(startIndex, startIndex + hotelsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   const renderFilters = () => (
-    <>
+    <div>
       <div
         className="p-3 rounded-3 mb-1 text-start"
         style={{ backgroundColor: "#191b1d" }}
@@ -310,7 +268,7 @@ export const HotelListView = () => {
           </a>
         </div>
       </div>
-    </>
+    </div>
   );
 
   return (
@@ -355,21 +313,16 @@ export const HotelListView = () => {
 
           {/* Hotel Cards */}
           <div className="col-md-9">
-            {filteredHotels.map((hotel) => (
+            {currentHotels.map((hotel) => (
               <div
                 className="card text-white mb-4 rounded-4 overflow-hidden position-relative"
                 style={{ backgroundColor: "#191b1d" }}
                 key={hotel.id}
               >
-                {hotel.discount && (
-                  <span className="badge bg-danger position-absolute top-0 start-0 m-2">
-                    {hotel.discount}
-                  </span>
-                )}
                 <div className="row g-0">
                   <div className="col-md-6">
                     <img
-                      src={hotel.image}
+                      src={hotel.heroImage}
                       alt={hotel.name}
                       className="img-fluid"
                       style={{
@@ -385,32 +338,15 @@ export const HotelListView = () => {
                       <div className="d-flex justify-content-between align-items-start">
                         <div>
                           <div className="mb-2 text-warning text-start">
-                            {"★".repeat(hotel.rating)}
+                            {"★".repeat(hotel.starRating)}
                           </div>
                           <h5 className="card-title mb-1 text-start">
                             {hotel.name}
                           </h5>
                           <p className="opacity-50 small mb-2 text-start">
                             <i className="bi bi-geo-alt-fill me-1"></i>{" "}
-                            {hotel.location}
+                            {hotel.contact?.address?.city?.name}
                           </p>
-                          <p className="small text-white-50 text-start">
-                            {hotel.amenities.join(" • ")}
-                          </p>
-                          <p
-                            className={`small mb-1 text-start ${
-                              hotel.refundable ? "text-success" : "text-danger"
-                            }`}
-                          >
-                            <i className="bi bi-check-circle-fill me-1"></i>{" "}
-                            {hotel.cancellation}
-                          </p>
-                          {hotel.breakfast && (
-                            <p className="text-success small text-start">
-                              <i className="bi bi-check-circle-fill me-1"></i>{" "}
-                              {hotel.breakfast}
-                            </p>
-                          )}
                         </div>
                         <div className="d-flex flex-column align-items-end gap-2 ms-3">
                           <i className="bi bi-heart-fill text-white-50 fs-5"></i>
@@ -421,7 +357,7 @@ export const HotelListView = () => {
                         <div>
                           <span className="fw-bold fs-5">
                             {currencySymbol}
-                            {hotel.price}
+                            {hotel.availability?.rate?.finalRate}
                           </span>
                           {hotel.oldPrice && (
                             <span className="text-decoration-line-through text-white-50 ms-2">
@@ -443,19 +379,35 @@ export const HotelListView = () => {
               </div>
             ))}
 
-            <div tabIndex={0} className="d-flex justify-content-end mt-4">
-              <div className="d-flex gap-2">
-                <button className="btn btn-primary rounded-pill px-4 py-2">
-                  1
+            {/* Pagination Controls */}
+            <div tabIndex={0} className="d-flex justify-content-center mt-4">
+              <div className="d-flex gap-2 flex-wrap">
+                <button
+                  className="btn btn-outline-light px-4 py-2 rounded-pill"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Prev
                 </button>
-                <button className="btn btn-outline-light rounded-pill px-4 py-2">
-                  2
-                </button>
-                <button className="btn btn-outline-light rounded-pill px-4 py-2">
-                  3
-                </button>
-                <button className="btn btn-outline-light rounded-pill px-4 py-2">
-                  4
+                {[...Array(totalPages)].map((_, index) => (
+                  <button
+                    key={index}
+                    className={`btn px-4 py-2 rounded-pill ${
+                      currentPage === index + 1
+                        ? "btn-primary"
+                        : "btn-outline-light"
+                    }`}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+                <button
+                  className="btn btn-outline-light px-4 py-2 rounded-pill"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
                 </button>
               </div>
             </div>

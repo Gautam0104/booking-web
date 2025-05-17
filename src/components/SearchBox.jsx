@@ -61,9 +61,9 @@ const SearchBox = () => {
             <option value="" disabled>
               Select location
             </option>
-            <option value="lucknow">Lucknow</option>
-            <option value="delhi">Delhi</option>
-            <option value="mumbai">Mumbai</option>
+            <option value="228250">Lucknow</option>
+            <option value="228252">Delhi</option>
+            <option value="228253">Mumbai</option>
           </select>
         </div>
 

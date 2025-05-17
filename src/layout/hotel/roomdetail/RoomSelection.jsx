@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import Image02 from "../../../assets/img/roomdetail/02.jpg";
 import Image10 from "../../../assets/img/roomdetail/10.jpg";
 import Image11 from "../../../assets/img/roomdetail/11.jpg";
@@ -66,7 +67,7 @@ const RoomSelection = () => {
           {/* Detail END */}
 
           {/* Right side content START */}
-          <aside className="col-xl-5 d-none d-xl-block">
+          <aside className="col-xl-5 mt-sm-5">
             <div className="card bg-transparent border">
               <div className="card-header bg-transparent border-bottom">
                 <h4 className="card-title mb-0">Price Summary</h4>
@@ -121,9 +122,9 @@ const RoomSelection = () => {
                 </ul>
 
                 <div className="d-grid gap-2">
-                  <a href="hotel-booking.html" className="btn btn-dark mb-0">
+                  <Link to="/hotelbooking" className="btn btn-dark mb-0">
                     Continue To Book
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
