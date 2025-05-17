@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/booking-web/static/css/main.034ffa2b.css",
-    "main.js": "/booking-web/static/js/main.8f83d673.js",
+    "main.js": "/booking-web/static/js/main.909f76b4.js",
     "static/js/453.d2d24df3.chunk.js": "/booking-web/static/js/453.d2d24df3.chunk.js",
     "static/media/10.jpg": "/booking-web/static/media/10.5fb56e39ed7d5f97742b.jpg",
     "static/media/14.jpg": "/booking-web/static/media/14.2ced8c58165df50f9777.jpg",
@@ -24,8 +24,6 @@
     "static/media/01 (1).jpg": "/booking-web/static/media/01 (1).15582d5dbc698782292a.jpg",
     "static/media/03.svg": "/booking-web/static/media/03.3c094d79041425af451ef9cab4a87494.svg",
     "static/media/17.svg": "/booking-web/static/media/17.fc3b6e174c32f08928c93a84b6cf6eda.svg",
-    "static/media/renaissance.jpeg": "/booking-web/static/media/renaissance.2151198ad2b6a4db78a1.jpeg",
-    "static/media/hyatt.jpeg": "/booking-web/static/media/hyatt.1df43fe2ba2a0c970b82.jpeg",
     "static/media/06.svg": "/booking-web/static/media/06.dc9576c06d7cd2c0ac914888bc00125b.svg",
     "static/media/mastercard.svg": "/booking-web/static/media/mastercard.dac31ecff9803347fa15d9c20888497e.svg",
     "static/media/05.svg": "/booking-web/static/media/05.fa440796cdc220949c714c8ac69a7848.svg",
@@ -42,11 +40,11 @@
     "static/media/12.svg": "/booking-web/static/media/12.f2b79866800469da8be5f5829b1eecea.svg",
     "index.html": "/booking-web/index.html",
     "main.034ffa2b.css.map": "/booking-web/static/css/main.034ffa2b.css.map",
-    "main.8f83d673.js.map": "/booking-web/static/js/main.8f83d673.js.map",
+    "main.909f76b4.js.map": "/booking-web/static/js/main.909f76b4.js.map",
     "453.d2d24df3.chunk.js.map": "/booking-web/static/js/453.d2d24df3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.034ffa2b.css",
-    "static/js/main.8f83d673.js"
+    "static/js/main.909f76b4.js"
   ]
 }
