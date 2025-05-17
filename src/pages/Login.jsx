@@ -33,6 +33,13 @@ const Login = () => {
         backgroundRepeat: "no-repeat",
         minHeight: "100vh"
       }}>
+            {/* Skip button */}
+    <Link to="/dashboard/home" 
+      className="btn btn-dark  position-absolute top-0 end-0 m-3 z-3"
+      style={{ zIndex: 3 }}
+    >
+      Skip
+    </Link>
                 <div
     style={{
       position: "absolute",
