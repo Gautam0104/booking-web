@@ -45,7 +45,7 @@ const RoomSelection = () => {
                     size="315 sq.ft"
                     view="City view"
                     bed="King Bed"
-                    price="$385"
+                    price="₹5210"
                   />
 
                   <RoomCard
@@ -56,7 +56,7 @@ const RoomSelection = () => {
                     size="458 sq.ft"
                     view="City view"
                     bed="King Bed"
-                    price="$485"
+                    price="₹6000"
                   />
                   {/* Room item END */}
                 </div>
@@ -79,7 +79,7 @@ const RoomSelection = () => {
                       <h6 className="fw-light small mb-1 text-white">
                         Check-in
                       </h6>
-                      <h6 className="mb-0 text-white">4 March 2022</h6>
+                      <h6 className="mb-0 text-white">20 May 2025</h6>
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -87,7 +87,7 @@ const RoomSelection = () => {
                       <h6 className="fw-light small mb-1 text-white">
                         Check out
                       </h6>
-                      <h6 className="mb-0 text-white">8 March 2022</h6>
+                      <h6 className="mb-0 text-white">21 May 2025</h6>
                     </div>
                   </div>
                 </div>
@@ -95,28 +95,28 @@ const RoomSelection = () => {
                 <ul className="list-group list-group-borderless mb-3 bg-dark">
                   <li className="list-group-item px-2 d-flex justify-content-between bg-dark">
                     <span className="h6 fw-light mb-0 text-white">
-                      $6,100 x 2 Nights
+                      ₹5,210 x 2 Nights
                     </span>
-                    <span className="h6 fw-light mb-0 text-white">$13,200</span>
+                    <span className="h6 fw-light mb-0 text-white">₹10,420</span>
                   </li>
                   <li className="list-group-item px-2 d-flex justify-content-between bg-dark">
                     <span className="h6 fw-light mb-0 text-white">
                       10% campaign discount
                     </span>
-                    <span className="h6 fw-light mb-0 text-white">-$500</span>
+                    <span className="h6 fw-light mb-0 text-white">-₹520</span>
                   </li>
                   <li className="list-group-item px-2 d-flex justify-content-between bg-dark">
                     <span className="h6 fw-light mb-0 text-white">
                       Services Fee
                     </span>
-                    <span className="h6 fw-light mb-0 text-white">$100</span>
+                    <span className="h6 fw-light mb-0 text-white">₹100</span>
                   </li>
                   <li className="list-group-item bg-light d-flex justify-content-between  px-2 mt-2 bg-dark">
                     <span className="h5 fw-normal mb-0 ps-1 text-white">
                       Total
                     </span>
                     <span className="h5 fw-normal mb-0 text-white">
-                      $13,500
+                      ₹10,000
                     </span>
                   </li>
                 </ul>

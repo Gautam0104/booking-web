@@ -33,7 +33,7 @@ const SearchBox = () => {
     const checkout = dateRange[1]?.toISOString().split("T")[0];
 
     navigate(
-      `/hotellist?location=${location}&checkin=${checkin}&checkout=${checkout}&guests=${guests}&rooms=${rooms}`
+      `/dashboard/hotellist?location=${location}&checkin=${checkin}&checkout=${checkout}&guests=${guests}&rooms=${rooms}`
     );
   };
 
@@ -67,21 +67,28 @@ const SearchBox = () => {
           </select>
         </div>
 
-        <div className="input-group text-white">
+        <div className="input-group text-white ms-3 ">
           <span className="input-group-text bg-dark border-0 text-white">
             <FaCalendarAlt />
           </span>
           <Flatpickr
-      options={{
-        mode: "range",
-        dateFormat: "d M",
-        allowInput: true,
-      }}
-      className="form-control bg-dark text-white border-0 white-placeholder"
-      placeholder="Select date range"
-      value={dateRange}
-      onChange={(selectedDates) => setDateRange(selectedDates)}
-    />
+            options={{
+              mode: "range",
+              dateFormat: "d M",
+              allowInput: true,
+              
+              minDate: "today", 
+            }}
+            className="form-control bg-dark text-white border-0 white-placeholder"
+            placeholder="Select date range"
+            value={dateRange}
+            onChange={(selectedDates) => {
+              // Only update state when both dates are selected or when clearing
+              if (selectedDates.length === 2 || selectedDates.length === 0) {
+                setDateRange(selectedDates);
+              }
+            }}
+          />
         </div>
 
         <div className="input-group text-white">
@@ -214,16 +221,27 @@ const SearchBox = () => {
 
         <div className="mb-3">
           <label className="form-label">Check-in / Check-out</label>
-          <div className="input-group">
+          <div className="input-group me-4">
             <span className="input-group-text bg-dark border-0 text-white">
               <FaCalendarAlt />
             </span>
             <Flatpickr
-              options={{ mode: "range", dateFormat: "d M" }}
-              className="form-control bg-dark text-white border-0 white-placeholder"
-              placeholder="Select date"
+              options={{
+                mode: "range",
+                dateFormat: "d M",
+                allowInput: true,
+                
+                minDate: "today", // Optional: prevents selecting past dates
+              }}
+              className="form-control bg-dark text-white border-0 white-placeholder me-2"
+              placeholder="Select date range"
               value={dateRange}
-              onChange={(dates) => setDateRange(dates)}
+              onChange={(selectedDates) => {
+                // Only update state when both dates are selected or when clearing
+                if (selectedDates.length === 2 || selectedDates.length === 0) {
+                  setDateRange(selectedDates);
+                }
+              }}
             />
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import { HotelList } from "../pages/HotelList";
@@ -14,18 +14,22 @@ import List from "../components/List";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Dashboard from "../pages/Dashboard";
+import Account from "../pages/Acount";
+import CompleteProfile from "../pages/CompleteProfile";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/booking-web" element={<Login />} />
+      <Route path="/" element={<Navigate to="/dashboard/home" replace />} />
+      <Route path="/booking-web" element={<Navigate to="/dashboard/home" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
       <Route path="/dashboard" element={<Dashboard />}>
         <Route path="home" element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="account" element={<Account />} />
+        <Route path="completeprofile" element={<CompleteProfile />} />
         <Route path="hotellist" element={<HotelList />} />
         <Route path="hotelgrid" element={<HotelGrid />} />
         <Route path="hoteldetail" element={<HotelDetail />} />

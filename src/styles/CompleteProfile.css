@@ -1,0 +1,15 @@
+form label {
+  color: #ccc;
+}
+
+form input {
+  background-color: #0b0a12;
+  border: 1px solid #333;
+  color: white;
+}
+
+form input:focus {
+  border-color: #0d6efd;
+  outline: none;
+  box-shadow: none;
+}

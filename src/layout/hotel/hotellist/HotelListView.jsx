@@ -42,7 +42,7 @@ export const HotelListView = () => {
 
   const currencySymbol = "₹";
   const selectRoom = () => {
-    navigate(`/roomdetail?index=0&location=${location}`);
+    navigate(`/dashboard/roomdetail?index=0&location=${location}`);
   };
 
   // Pagination logic
@@ -337,9 +337,7 @@ export const HotelListView = () => {
                     <div className="card-body h-100 d-flex flex-column justify-content-between">
                       <div className="d-flex justify-content-between align-items-start">
                         <div>
-                          <div className="mb-2 text-warning text-start">
-                            {"★".repeat(hotel.starRating)}
-                          </div>
+                         
                           <h5 className="card-title mb-1 text-start">
                             {hotel.name}
                           </h5>
@@ -347,6 +345,9 @@ export const HotelListView = () => {
                             <i className="bi bi-geo-alt-fill me-1"></i>{" "}
                             {hotel.contact?.address?.city?.name}
                           </p>
+                           <div className="mb-2 text-warning text-start">
+                            {"★".repeat(hotel.starRating)}
+                          </div>
                         </div>
                         <div className="d-flex flex-column align-items-end gap-2 ms-3">
                           <i className="bi bi-heart-fill text-white-50 fs-5"></i>

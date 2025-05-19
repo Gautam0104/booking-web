@@ -39,6 +39,19 @@
   }
 }
 
+.profile-circle {
+  background-color: #8e85e6;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Dark background and light text for dropdown */
 .dropdown-menu {
   background-color: #191b1d !important;
@@ -63,4 +76,12 @@
   border-radius: 0.5rem;
 
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@media (max-width: 576px) {
+  .dropdown-menu {
+    right: 10px !important;
+    left: auto !important;
+    min-width: 90vw !important;
+  }
 }

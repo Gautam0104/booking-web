@@ -41,7 +41,7 @@ export const HeroSection = () => {
     const checkout = dateRange[1]?.toISOString().split("T")[0];
 
     navigate(
-      `/hotellist?location=${location}&checkin=${checkin}&checkout=${checkout}&guests=${guests}&rooms=${rooms}`
+      `/dashboard/hotellist?location=${location}&checkin=${checkin}&checkout=${checkout}&guests=${guests}&rooms=${rooms}`
     );
   };
 
@@ -83,9 +83,8 @@ export const HeroSection = () => {
           >
             {/* Location */}
             <div
-              className={`form-group flex-grow-1 w-auto ${
-                showInputs ? "d-block" : "d-none d-sm-block"
-              }`}
+              className={`form-group flex-grow-1 w-auto ${showInputs ? "d-block" : "d-none d-sm-block"
+                }`}
             >
               <label className="form-label opacity-50">Location</label>
               <div className="input-group ">
@@ -100,7 +99,7 @@ export const HeroSection = () => {
                   <option value="" disabled>
                     Select location
                   </option>
-                  <option value="lucknow">Lucknow</option>
+                  <option value="228250">Lucknow</option>
                   <option value="delhi">Delhi</option>
                   <option value="mumbai">Mumbai</option>
                 </select>
@@ -109,9 +108,8 @@ export const HeroSection = () => {
 
             {/* Check-in – out */}
             <div
-              className={`form-group flex-grow-1 w-auto ${
-                showInputs ? "d-block" : "d-none d-sm-block"
-              }`}
+              className={`form-group flex-grow-1 w-auto ${showInputs ? "d-block" : "d-none d-sm-block"
+                }`}
             >
               <label className="form-label opacity-50">Check in – out</label>
               <div className="input-group">
@@ -119,20 +117,30 @@ export const HeroSection = () => {
                   <i className="bi bi-calendar-range-fill"></i>
                 </span>
                 <Flatpickr
-                  options={{ mode: "range", dateFormat: "d M" }}
+                  options={{
+                    mode: "range",
+                    dateFormat: "d M",
+                    allowInput: true,
+
+                    minDate: "today",
+                  }}
                   className="form-control bg-dark text-white border-0 white-placeholder me-2"
-                  placeholder="Select date"
+                  placeholder="Select date range"
                   value={dateRange}
-                  onChange={(date) => setDateRange(date)}
+                  onChange={(selectedDates) => {
+                    // Only update state when both dates are selected or when clearing
+                    if (selectedDates.length === 2 || selectedDates.length === 0) {
+                      setDateRange(selectedDates);
+                    }
+                  }}
                 />
               </div>
             </div>
 
             {/* Guests & Rooms */}
             <div
-              className={`form-group flex-grow-1 w-auto ${
-                showInputs ? "d-block" : "d-none d-sm-block"
-              }`}
+              className={`form-group flex-grow-1 w-auto ${showInputs ? "d-block" : "d-none d-sm-block"
+                }`}
             >
               <label className="form-label opacity-50">Guests & rooms</label>
               <div className="input-group">
@@ -269,3 +277,4 @@ export const HeroSection = () => {
     </div>
   );
 };
+  
