@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -11,10 +11,12 @@ const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
+  // Handle input changes
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle email/password login
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,23 +27,18 @@ const Login = () => {
       });
 
       if (data.success && data.token) {
-        console.log(data.user)
-        // Save user to localStorage
         const email = data.user?.email;
-        const usernameOnly = email?.split("@")[0]; 
+        const usernameOnly = email?.split("@")[0];
 
         localStorage.setItem("user", JSON.stringify({ username: usernameOnly }));
-        // Save token to localStorage
         localStorage.setItem('token', data.token);
+
         MySwal.fire({
           icon: 'success',
           title: 'Login successful!',
           timer: 1500,
           showConfirmButton: false
         });
-
-        // Optionally store token
-        localStorage.setItem('token', data.token);
 
         navigate('/dashboard/home');
       } else {
@@ -61,9 +58,77 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    MySwal.fire('Google login clicked!');
+  // Handle Google token response
+  const handleGoogleCredentialResponse = async (response) => {
+    const token = response.credential;
+    try {
+      const res = await fetch("https://yourapi.com/api/auth/google", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+
+      const data = await res.json();
+
+      if (data.success && data.token) {
+        const email = data.user?.email;
+        const usernameOnly = email?.split("@")[0];
+
+        localStorage.setItem("user", JSON.stringify({ username: usernameOnly }));
+        localStorage.setItem("token", data.token);
+
+        MySwal.fire({
+          icon: 'success',
+          title: 'Google Login successful!',
+          timer: 1500,
+          showConfirmButton: false
+        });
+
+        navigate('/dashboard/home');
+      } else {
+        MySwal.fire({
+          icon: 'error',
+          title: 'Google Login failed',
+          text: data.message || 'Invalid Google token',
+        });
+      }
+    } catch (err) {
+      console.error("Google login error:", err);
+      MySwal.fire({
+        icon: 'error',
+        title: 'Login error',
+        text: 'Something went wrong with Google login.',
+      });
+    }
   };
+
+  // Initialize Google Login on load
+  useEffect(() => {
+    if (window.google) {
+      window.google.accounts.id.initialize({
+        client_id: '918771734906-fs35v08ugmjcvji1s3er3bhb0frh70du.apps.googleusercontent.com', 
+        callback: handleGoogleCredentialResponse,
+      });
+
+      window.google.accounts.id.renderButton(
+        document.getElementById("google-btn-container"),
+        {
+  theme: "outline", 
+  size: "large", 
+  width: "50", 
+  text: "continue_with",
+  shape: "rectangular",
+  logo_alignment: "left",
+  // Add custom styling
+  style: {
+    color: 'white',
+    border: '1px solid white',
+    backgroundColor: 'transparent'
+  }
+}
+      );
+    }
+  }, []);
 
   const handleFacebookLogin = () => {
     MySwal.fire('Facebook login clicked!');
@@ -78,11 +143,6 @@ const Login = () => {
         backgroundRepeat: "no-repeat",
         minHeight: "100vh"
       }}>
-      {/* <Link to="/dashboard/home"
-        className="btn btn-outline-dark text-white position-absolute top-0 end-0 m-3 z-3"
-        style={{ zIndex: 3 }}>
-        Skip
-      </Link> */}
 
       <div
         style={{
@@ -142,13 +202,15 @@ const Login = () => {
                     <button className="btn btn-primary btn-lg w-100" type="submit">Login</button>
                   </form>
 
-                  <div className="d-flex justify-content-center text-center mt-4 gap-3">
+                  <div className="d-flex justify-content-center text-center mt-4 gap-3 flex-wrap">
                     <button onClick={handleFacebookLogin} className="btn btn-outline-primary">
                       <i className="bi bi-facebook me-2"></i>Facebook
                     </button>
-                    <button onClick={handleGoogleLogin} className="btn btn-outline-danger">
-                      <i className="bi bi-google me-2"></i>Google
-                    </button>
+
+                    {/* Google button placeholder */}
+                    <div className='' id="google-btn-container">
+                      
+                    </div>
                   </div>
                 </div>
 

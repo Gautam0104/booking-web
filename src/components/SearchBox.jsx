@@ -49,12 +49,12 @@ const SearchBox = () => {
           zIndex: 10
         }}
       >
-        <div className="input-group text-white">
-          <span className="input-group-text bg-dark border-0 text-white">
+        <div className="input-group text-white ">
+          <span className="input-group-text bg-transparent text-white border-secondary">
             <FaMapMarkerAlt />
           </span>
           <select
-            className="form-control bg-dark border-0 text-white white-placeholder"
+            className="form-control bg-dark text-white border-secondary"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           >
@@ -67,8 +67,8 @@ const SearchBox = () => {
           </select>
         </div>
 
-        <div className="input-group text-white ms-3 ">
-          <span className="input-group-text bg-dark border-0 text-white">
+        <div className="input-group text-white  ">
+         <span className="input-group-text bg-transparent text-white border-secondary">
             <FaCalendarAlt />
           </span>
           <Flatpickr
@@ -79,7 +79,7 @@ const SearchBox = () => {
               
               minDate: "today", 
             }}
-            className="form-control bg-dark text-white border-0 white-placeholder"
+            className="form-control bg-dark text-white border-secondary custom-placeholder"
             placeholder="Select date range"
             value={dateRange}
             onChange={(selectedDates) => {
@@ -91,13 +91,13 @@ const SearchBox = () => {
           />
         </div>
 
-        <div className="input-group text-white">
-          <span className="input-group-text bg-dark border-0 text-white">
+        <div className="input-group text-white rounded-right">
+         <span className="input-group-text bg-transparent text-white border-secondary">
             <FaUser />
           </span>
           <input
             type="text"
-            className="form-guest-selector form-control selection-result bg-dark text-white border-0"
+            className="form-control bg-dark text-white border-secondary"
             value={handleGuestSummary()}
             readOnly
             data-bs-toggle="dropdown"
@@ -195,17 +195,17 @@ const SearchBox = () => {
 
       {/* Mobile Version */}
       <div
-        className="d-md-none mt-4 bg-dark text-white p-4 rounded-4 shadow"
-        style={{ zIndex: 10 }}
+        className="d-md-none mt-4  text-white p-4 rounded-4 shadow"
+        style={{backgroundColor: "#191b1d", zIndex: 10 }}
       >
         <div className="mb-3">
           <label className="form-label">Location</label>
           <div className="input-group">
-            <span className="input-group-text bg-dark border-0 text-white">
+           <span className="input-group-text bg-transparent text-white border-secondary">
               <FaMapMarkerAlt />
             </span>
             <select
-              className="form-control bg-dark border-0 text-white white-placeholder"
+              className="form-control bg-dark text-white border-secondary"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             >
@@ -221,8 +221,8 @@ const SearchBox = () => {
 
         <div className="mb-3">
           <label className="form-label">Check-in / Check-out</label>
-          <div className="input-group me-4">
-            <span className="input-group-text bg-dark border-0 text-white">
+          <div className="input-group ">
+           <span className="input-group-text bg-transparent text-white border-secondary">
               <FaCalendarAlt />
             </span>
             <Flatpickr
@@ -233,8 +233,9 @@ const SearchBox = () => {
                 
                 minDate: "today", // Optional: prevents selecting past dates
               }}
-              className="form-control bg-dark text-white border-0 white-placeholder me-2"
+              className="form-control bg-dark text-white border-secondary white-placeholder"
               placeholder="Select date range"
+              
               value={dateRange}
               onChange={(selectedDates) => {
                 // Only update state when both dates are selected or when clearing
@@ -249,12 +250,12 @@ const SearchBox = () => {
         <div className="mb-3">
           <label className="form-label">Guests & Rooms</label>
           <div className="input-group">
-            <span className="input-group-text bg-dark border-0 text-white">
+            <span className="input-group-text bg-transparent text-white border-secondary">
               <FaUser />
             </span>
             <input
               type="text"
-              className="form-guest-selector form-control selection-result bg-dark text-white border-0"
+              className="form-control bg-dark text-white border-secondary"
               value={handleGuestSummary()}
               readOnly
               data-bs-toggle="dropdown"

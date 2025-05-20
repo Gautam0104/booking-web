@@ -5,6 +5,9 @@
     overflow: hidden;
     margin: 10px;
     height: 180px;
+    width: 100%;
+ 
+  object-fit: cover;
 }
 
 .carousel-img {
@@ -27,4 +30,22 @@
 .carousel-text p {
     color: #ccc;
     font-size: 14px;
+}
+
+@media (max-width: 767.98px) {
+  .carousel-control-prev,
+  .carousel-control-next {
+    display: none;
+  }
+  .custom-card {
+    background-color: #191b1d;
+    color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 10px;
+    height: 180px;
+    width: 95%;
+ 
+  object-fit: cover;
+}
 }

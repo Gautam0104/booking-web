@@ -4,7 +4,12 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/dark.css";
 import "flatpickr/dist/flatpickr.css";
 import Image01 from "../../../assets/img/hotellist/01.jpg";
-
+import {
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaUser,
+  
+} from "react-icons/fa";
 export const HeroSection = () => {
   // State to toggle visibility of input fields
   const [showInputs, setShowInputs] = useState(false);
@@ -76,8 +81,8 @@ export const HeroSection = () => {
               zIndex: 2,
               paddingLeft: "60px",
               paddingRight: "60px",
-              paddingTop: "20px",
-              paddingBottom: "20px",
+              paddingTop: "30px",
+              paddingBottom: "30px",
               backgroundColor: "#191b1d"
             }}
           >
@@ -86,19 +91,19 @@ export const HeroSection = () => {
               className={`form-group flex-grow-1 w-auto ${showInputs ? "d-block" : "d-none d-sm-block"
                 }`}
             >
-              <label className="form-label opacity-50">Location</label>
+              {/* <label className="form-label opacity-50">Location</label> */}
               <div className="input-group ">
-                <span className="input-group-text bg-dark border-0 text-white">
-                  <i className="bi bi-geo-alt-fill"></i>
-                </span>
+                <span className="input-group-text bg-transparent text-white border-secondary">
+                            <FaMapMarkerAlt />
+                          </span>
                 <select
-                  className="form-control bg-dark border-0 text-white white-placeholder me-2"
+                  className="form-control bg-dark text-white border-secondary me-2"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 >
-                  <option value="" disabled>
+                  {/* <option value="" disabled>
                     Select location
-                  </option>
+                  </option> */}
                   <option value="228250">Lucknow</option>
                   <option value="delhi">Delhi</option>
                   <option value="mumbai">Mumbai</option>
@@ -111,11 +116,11 @@ export const HeroSection = () => {
               className={`form-group flex-grow-1 w-auto ${showInputs ? "d-block" : "d-none d-sm-block"
                 }`}
             >
-              <label className="form-label opacity-50">Check in – out</label>
+              {/* <label className="form-label opacity-50">Check in – out</label> */}
               <div className="input-group">
-                <span className="input-group-text bg-dark border-0 text-white">
-                  <i className="bi bi-calendar-range-fill"></i>
-                </span>
+                <span className="input-group-text bg-transparent text-white border-secondary">
+                            <FaCalendarAlt />
+                          </span>
                 <Flatpickr
                   options={{
                     mode: "range",
@@ -124,7 +129,7 @@ export const HeroSection = () => {
 
                     minDate: "today",
                   }}
-                  className="form-control bg-dark text-white border-0 white-placeholder me-2"
+                  className="form-control bg-dark text-white border-secondary custom-placeholder me-2"
                   placeholder="Select date range"
                   value={dateRange}
                   onChange={(selectedDates) => {
@@ -142,14 +147,14 @@ export const HeroSection = () => {
               className={`form-group flex-grow-1 w-auto ${showInputs ? "d-block" : "d-none d-sm-block"
                 }`}
             >
-              <label className="form-label opacity-50">Guests & rooms</label>
+              {/* <label className="form-label opacity-50">Guests & rooms</label> */}
               <div className="input-group">
-                <span className="input-group-text bg-dark border-0 text-white">
-                  <i className="bi bi-person-fill"></i>
-                </span>
+                <span className="input-group-text bg-transparent text-white border-secondary">
+                            <FaUser />
+                          </span>
                 <input
                   type="text"
-                  className="form-control selection-result bg-dark text-white border-0 rounded-1"
+                  className="form-control bg-dark text-white border-secondary me-2"
                   value={handleGuestSummary()}
                   readOnly
                   data-bs-toggle="dropdown"

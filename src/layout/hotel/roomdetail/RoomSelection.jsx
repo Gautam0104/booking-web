@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import GLightbox from "glightbox";
+import "glightbox/dist/css/glightbox.min.css";
 
+// Room Images
 import Image02 from "../../../assets/img/roomdetail/02.jpg";
 import Image10 from "../../../assets/img/roomdetail/10.jpg";
 import Image11 from "../../../assets/img/roomdetail/11.jpg";
@@ -10,6 +13,12 @@ import Image15 from "../../../assets/img/roomdetail/15.jpg";
 import Image16 from "../../../assets/img/roomdetail/16.jpg";
 
 const RoomSelection = () => {
+  useEffect(() => {
+    GLightbox({
+      selector: '[data-glightbox]',
+    });
+  }, []);
+
   return (
     <section className="pt-0 mt-5">
       <div className="container">
@@ -25,7 +34,7 @@ const RoomSelection = () => {
                   <form className="form-control-bg-light">
                     <select className="form-select form-select-sm js-choice border-0 bg-secondary text-white">
                       <option value="">Select Option</option>
-                      <option value="recent">Recently search</option>
+                      <option value="recent">Recently searched</option>
                       <option value="popular">Most popular</option>
                       <option value="rated">Top rated</option>
                     </select>
@@ -36,7 +45,7 @@ const RoomSelection = () => {
               {/* Card body START */}
               <div className="card-body p-0 pt-3 text-white">
                 <div className="vstack gap-5 text-white">
-                  {/* Room item START */}
+                  {/* Room Cards */}
                   <RoomCard
                     image={Image02}
                     photos={5}
@@ -51,14 +60,13 @@ const RoomSelection = () => {
                   <RoomCard
                     image={Image10}
                     photos={4}
-                    galleryImages={[[Image13, Image11, Image15, Image16]]}
+                    galleryImages={[Image13, Image11, Image15, Image16]}
                     title="Deluxe Room"
                     size="458 sq.ft"
                     view="City view"
                     bed="King Bed"
                     price="₹6000"
                   />
-                  {/* Room item END */}
                 </div>
               </div>
               {/* Card body END */}
@@ -111,7 +119,7 @@ const RoomSelection = () => {
                     </span>
                     <span className="h6 fw-light mb-0 text-white">₹100</span>
                   </li>
-                  <li className="list-group-item bg-light d-flex justify-content-between  px-2 mt-2 bg-dark">
+                  <li className="list-group-item d-flex justify-content-between px-2 mt-2 bg-dark">
                     <span className="h5 fw-normal mb-0 ps-1 text-white">
                       Total
                     </span>
@@ -146,6 +154,8 @@ const RoomCard = ({
   bed,
   price
 }) => {
+  const galleryId = `gallery-${title.replace(/\s+/g, "-").toLowerCase()}`;
+
   return (
     <div className="card border bg-transparent p-3">
       <div className="row g-3 g-md-4">
@@ -153,23 +163,23 @@ const RoomCard = ({
           <div className="position-relative">
             <img src={image} className="card-img" alt={title} />
             <div className="card-img-overlay">
-              <Link
+              <a
                 href={galleryImages[0]}
                 className="badge bg-dark stretched-link"
-                data-glightbox
-                data-gallery="gallery"
+                data-glightbox={`title: ${title}`}
+                data-gallery={galleryId}
               >
                 {photos} Photos <i className="bi bi-arrow-right"></i>
-              </Link>
+              </a>
             </div>
             {galleryImages.map((img, i) => (
-              <Link
+              <a
                 key={i}
-                data-glightbox
-                data-gallery="gallery"
                 href={img}
-                className={i === 1 ? "stretched-link z-index-9" : ""}
-              ></Link>
+                data-glightbox={`title: ${title}`}
+                data-gallery={galleryId}
+                style={{ display: "none" }}
+              />
             ))}
           </div>
         </div>
@@ -198,9 +208,9 @@ const RoomCard = ({
                 <h6 className="h5 mb-0 text-success">{price}</h6>
                 <span className="fw-light">/per night</span>
               </div>
-              <Link href="#" className="btn btn-sm btn-dark mb-0">
+              <a href="#" className="btn btn-sm btn-dark mb-0">
                 Select room
-              </Link>
+              </a>
             </div>
           </div>
         </div>

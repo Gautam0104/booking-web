@@ -102,6 +102,10 @@
     color: white !important;
     opacity: 0.5;
 }
+.custom-placeholder::placeholder {
+    color: white !important;
+    opacity: 1;
+}
 
 select.white-placeholder:invalid {
     color: white;
