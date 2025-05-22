@@ -4,12 +4,7 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/dark.css";
 import "flatpickr/dist/flatpickr.css";
 import Image01 from "../../../assets/img/hotellist/01.jpg";
-import {
-  FaMapMarkerAlt,
-  FaCalendarAlt,
-  FaUser,
-  
-} from "react-icons/fa";
+import { FaMapMarkerAlt, FaCalendarAlt, FaUser } from "react-icons/fa";
 export const HeroSection = () => {
   // State to toggle visibility of input fields
   const [showInputs, setShowInputs] = useState(false);
@@ -88,14 +83,15 @@ export const HeroSection = () => {
           >
             {/* Location */}
             <div
-              className={`form-group flex-grow-1 w-auto ${showInputs ? "d-block" : "d-none d-sm-block"
-                }`}
+              className={`form-group flex-grow-1 w-auto ${
+                showInputs ? "d-block" : "d-none d-sm-block"
+              }`}
             >
               {/* <label className="form-label opacity-50">Location</label> */}
               <div className="input-group ">
                 <span className="input-group-text bg-transparent text-white border-secondary">
-                            <FaMapMarkerAlt />
-                          </span>
+                  <FaMapMarkerAlt />
+                </span>
                 <select
                   className="form-control bg-dark text-white border-secondary me-2"
                   value={location}
@@ -113,28 +109,32 @@ export const HeroSection = () => {
 
             {/* Check-in – out */}
             <div
-              className={`form-group flex-grow-1 w-auto ${showInputs ? "d-block" : "d-none d-sm-block"
-                }`}
+              className={`form-group flex-grow-1 w-auto ${
+                showInputs ? "d-block" : "d-none d-sm-block"
+              }`}
             >
               {/* <label className="form-label opacity-50">Check in – out</label> */}
               <div className="input-group">
                 <span className="input-group-text bg-transparent text-white border-secondary">
-                            <FaCalendarAlt />
-                          </span>
+                  <FaCalendarAlt />
+                </span>
                 <Flatpickr
                   options={{
                     mode: "range",
                     dateFormat: "d M",
                     allowInput: true,
 
-                    minDate: "today",
+                    minDate: "today"
                   }}
                   className="form-control bg-dark text-white border-secondary custom-placeholder me-2"
                   placeholder="Select date range"
                   value={dateRange}
                   onChange={(selectedDates) => {
                     // Only update state when both dates are selected or when clearing
-                    if (selectedDates.length === 2 || selectedDates.length === 0) {
+                    if (
+                      selectedDates.length === 2 ||
+                      selectedDates.length === 0
+                    ) {
                       setDateRange(selectedDates);
                     }
                   }}
@@ -144,14 +144,15 @@ export const HeroSection = () => {
 
             {/* Guests & Rooms */}
             <div
-              className={`form-group flex-grow-1 w-auto ${showInputs ? "d-block" : "d-none d-sm-block"
-                }`}
+              className={`form-group flex-grow-1 w-auto ${
+                showInputs ? "d-block" : "d-none d-sm-block"
+              }`}
             >
               {/* <label className="form-label opacity-50">Guests & rooms</label> */}
               <div className="input-group">
                 <span className="input-group-text bg-transparent text-white border-secondary">
-                            <FaUser />
-                          </span>
+                  <FaUser />
+                </span>
                 <input
                   type="text"
                   className="form-control bg-dark text-white border-secondary me-2"
@@ -282,4 +283,3 @@ export const HeroSection = () => {
     </div>
   );
 };
-  

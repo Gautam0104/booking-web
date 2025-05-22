@@ -16,12 +16,16 @@ import Signup from "../pages/Signup";
 import Dashboard from "../pages/Dashboard";
 import Account from "../pages/Acount";
 import CompleteProfile from "../pages/CompleteProfile";
+import Location from "../pages/Location";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard/home" replace />} />
-      <Route path="/booking-web" element={<Navigate to="/dashboard/home" replace />} />
+      <Route
+        path="/booking-web"
+        element={<Navigate to="/dashboard/home" replace />}
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
@@ -40,6 +44,7 @@ const AppRoutes = () => {
         <Route path="blog" element={<Blog />} />
         <Route path="apitest" element={<List />} />
         <Route path="booking-web" element={<Home />} />
+        <Route path="location" element={<Location />} />
       </Route>
     </Routes>
   );
