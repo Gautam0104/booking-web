@@ -10,6 +10,7 @@ export const HotelListView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const hotelsPerPage = 4;
   const [sortBy, setSortBy] = useState("default");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Filter states
   const [filters, setFilters] = useState({
@@ -76,6 +77,14 @@ export const HotelListView = () => {
   // Apply filters and sorting whenever filters, allHotels, or sortBy changes
   useEffect(() => {
     let result = [...allHotels];
+
+    // Apply name search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter((hotel) =>
+        hotel.name.toLowerCase().includes(query)
+      );
+    }
 
     // Apply hotel type filter
     if (filters.hotelType.length > 0 && !filters.hotelType.includes("All")) {
@@ -159,7 +168,7 @@ export const HotelListView = () => {
 
     setFilteredHotels(result);
     setCurrentPage(1); // Reset to first page when filters or sorting changes
-  }, [filters, allHotels, sortBy]);
+  }, [filters, allHotels, sortBy, searchQuery]);
 
   const navigate = useNavigate();
 
@@ -288,6 +297,7 @@ export const HotelListView = () => {
       amenities: [],
       facilities: []
     });
+    setSearchQuery("");
   };
 
   const handleSort = (sortOption) => {
@@ -296,6 +306,34 @@ export const HotelListView = () => {
 
   const renderFilters = () => (
     <div>
+      {/* Hotel Name Search Filter */}
+      <div
+        className="p-3 rounded-3 mb-3 text-start text-white"
+        style={{ backgroundColor: "#191b1d" }}
+      >
+        <div className="d-flex justify-content-between align-items-center">
+          <h5 className="mb-0">Search by Name</h5>
+          <i
+            className="bi bi-chevron-down d-md-none cursor-pointer"
+            data-bs-toggle="collapse"
+            data-bs-target="#nameSearchDropdown"
+            aria-expanded="false"
+            aria-controls="nameSearchDropdown"
+            style={{ fontSize: "1.2rem" }}
+          ></i>
+        </div>
+
+        <div className="collapse d-md-block mt-2" id="nameSearchDropdown">
+          <input
+            type="text"
+            className="form-control bg-dark text-white border-secondary"
+            placeholder="Enter hotel name..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      </div>
+
       {/* Hotel Type Filter */}
       <div
         className="p-3 rounded-3 mb-3 text-start text-white"
@@ -548,7 +586,8 @@ export const HotelListView = () => {
         filters.customerRating !== null ||
         filters.ratingStar !== null ||
         filters.amenities.length > 0 ||
-        filters.facilities.length > 0) && (
+        filters.facilities.length > 0 ||
+        searchQuery) && (
         <button
           className="btn btn-outline-primary w-100 mt-2"
           onClick={clearAllFilters}
@@ -577,7 +616,8 @@ export const HotelListView = () => {
                 filters.customerRating !== null ||
                 filters.ratingStar !== null ||
                 filters.amenities.length > 0 ||
-                filters.facilities.length > 0) && (
+                filters.facilities.length > 0 ||
+                searchQuery) && (
                 <span className="badge bg-primary ms-2">
                   {[
                     filters.hotelType.length,
@@ -585,7 +625,8 @@ export const HotelListView = () => {
                     filters.customerRating ? 1 : 0,
                     filters.ratingStar ? 1 : 0,
                     filters.amenities.length,
-                    filters.facilities.length
+                    filters.facilities.length,
+                    searchQuery ? 1 : 0
                   ].reduce((a, b) => a + b, 0)}
                 </span>
               )}
@@ -624,13 +665,23 @@ export const HotelListView = () => {
               filters.customerRating !== null ||
               filters.ratingStar !== null ||
               filters.amenities.length > 0 ||
-              filters.facilities.length > 0) && (
+              filters.facilities.length > 0 ||
+              searchQuery) && (
               <div
                 className="mb-4 p-3 rounded-3"
                 style={{ backgroundColor: "#191b1d" }}
               >
                 <div className="d-flex flex-wrap gap-2 align-items-center text-white">
                   <span className="me-2">Applied Filters:</span>
+                  {searchQuery && (
+                    <span className="badge bg-primary me-2">
+                      Name: {searchQuery}{" "}
+                      <i
+                        className="bi bi-x-lg ms-1 cursor-pointer"
+                        onClick={() => setSearchQuery("")}
+                      ></i>
+                    </span>
+                  )}
                   {filters.hotelType.map((type) => (
                     <span key={type} className="badge bg-primary me-2">
                       {type}{" "}
@@ -823,37 +874,6 @@ export const HotelListView = () => {
                                   more...
                                 </span>
                               </p>
-                              {/* Facilities chips */}
-                              {/* <div className="d-flex flex-wrap gap-2 mt-2">
-                                {hotel.facilities &&
-                                  Object.entries(hotel.facilities)
-                                    .filter(([_, value]) => value)
-                                    .slice(0, 4)
-                                    .map(([facility]) => (
-                                      <span
-                                        key={facility}
-                                        className="badge bg-secondary text-white"
-                                        style={{ fontSize: "0.75rem" }}
-                                      >
-                                        {facility}
-                                      </span>
-                                    ))}
-                                {hotel.facilities &&
-                                  Object.keys(hotel.facilities).filter(
-                                    (k) => hotel.facilities[k]
-                                  ).length > 4 && (
-                                    <span
-                                      className="badge bg-dark text-white"
-                                      style={{ fontSize: "0.75rem" }}
-                                    >
-                                      +
-                                      {Object.keys(hotel.facilities).filter(
-                                        (k) => hotel.facilities[k]
-                                      ).length - 4}{" "}
-                                      more
-                                    </span>
-                                  )}
-                              </div> */}
                             </div>
                             <div className="d-flex flex-column align-items-end gap-2 ms-3">
                               <i className="bi bi-heart text-white-50 fs-5 cursor-pointer"></i>
