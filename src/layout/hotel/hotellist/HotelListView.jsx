@@ -39,6 +39,8 @@ export const HotelListView = () => {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
   const location = queryParams.get("location");
+  const checkInDate = queryParams.get("checkin");
+  const checkOutDate = queryParams.get("checkout");
 
   useEffect(() => {
     const getHotels = async () => {
@@ -179,7 +181,9 @@ export const HotelListView = () => {
 
   const currencySymbol = "₹";
   const selectRoom = (hotelId) => {
-    navigate(`/roomdetail?id=${hotelId}&location=${location}`);
+    navigate(
+      `/dashboard/roomdetail?id=${hotelId}&location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}`
+    );
   };
 
   // Pagination logic

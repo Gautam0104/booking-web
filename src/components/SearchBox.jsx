@@ -283,76 +283,82 @@ const SearchBox = () => {
             value={guestSummary()}
             readOnly
             onClick={() => setShowGuestSelector(!showGuestSelector)}
+            data-bs-toggle="dropdown"
           />
-        </div>
-
-        {showGuestSelector && (
-          <div className="guest-selector-dropdown bg-dark text-white p-3 shadow mt-2 rounded">
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <span>Adults</span>
-              <div className="d-flex align-items-center">
+          <ul className="dropdown-menu guest-selector-dropdown text-white p-4 shadow">
+            <li className="d-flex justify-content-between">
+              <div>
+                <h6 className="mb-0">Adults</h6>
+                <small>Ages 13 or above</small>
+              </div>
+              <div className="hstack gap-1 align-items-center">
                 <button
-                  className="btn btn-outline-light btn-sm me-2"
+                  type="button"
+                  className="btn btn-link p-0 ms-4"
                   onClick={() => setAdults(Math.max(1, adults - 1))}
                 >
-                  -
+                  <i className="bi bi-dash-circle fs-5"></i>
                 </button>
-                <span className="mx-2">{adults}</span>
+                <h6 className="mb-0">{adults}</h6>
                 <button
-                  className="btn btn-outline-light btn-sm ms-2"
+                  type="button"
+                  className="btn btn-link p-0"
                   onClick={() => setAdults(adults + 1)}
                 >
-                  +
+                  <i className="bi bi-plus-circle fs-5"></i>
                 </button>
               </div>
-            </div>
-
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <span>Children</span>
-              <div className="d-flex align-items-center">
+            </li>
+            <li className="dropdown-divider"></li>
+            <li className="d-flex justify-content-between">
+              <div>
+                <h6 className="mb-0">Child</h6>
+                <small>Ages 13 below</small>
+              </div>
+              <div className="hstack gap-1 align-items-center">
                 <button
-                  className="btn btn-outline-light btn-sm me-2"
+                  type="button"
+                  className="btn btn-link p-0"
                   onClick={() => setChildren(Math.max(0, children - 1))}
                 >
-                  -
+                  <i className="bi bi-dash-circle fs-5"></i>
                 </button>
-                <span className="mx-2">{children}</span>
+                <h6 className="mb-0">{children}</h6>
                 <button
-                  className="btn btn-outline-light btn-sm ms-2"
+                  type="button"
+                  className="btn btn-link p-0"
                   onClick={() => setChildren(children + 1)}
                 >
-                  +
+                  <i className="bi bi-plus-circle fs-5"></i>
                 </button>
               </div>
-            </div>
-
-            <div className="d-flex justify-content-between align-items-center">
-              <span>Rooms</span>
-              <div className="d-flex align-items-center">
+            </li>
+            <li className="dropdown-divider"></li>
+            <li className="d-flex justify-content-between">
+              <div>
+                <h6 className="mb-0">Rooms</h6>
+                <small>Max room 8</small>
+              </div>
+              <div className="hstack gap-1 align-items-center">
                 <button
-                  className="btn btn-outline-light btn-sm me-2"
+                  type="button"
+                  className="btn btn-link p-0"
                   onClick={() => setRooms(Math.max(1, rooms - 1))}
                 >
-                  -
+                  <i className="bi bi-dash-circle fs-5"></i>
                 </button>
-                <span className="mx-2">{rooms}</span>
+                <h6 className="mb-0">{rooms}</h6>
                 <button
-                  className="btn btn-outline-light btn-sm ms-2"
-                  onClick={() => setRooms(rooms + 1)}
+                  type="button"
+                  className="btn btn-link p-0"
+                  onClick={() => setRooms(Math.min(8, rooms + 1))}
                 >
-                  +
+                  <i className="bi bi-plus-circle fs-5"></i>
                 </button>
               </div>
-            </div>
-
-            <button
-              className="btn btn-primary w-100 mt-3"
-              onClick={() => setShowGuestSelector(false)}
-            >
-              Done
-            </button>
-          </div>
-        )}
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Search Button */}

@@ -1,16 +1,155 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 import Image17 from "../assets/img/hotelbooking/17.svg";
 import Image02 from "../assets/img/hotelbooking/02.jpg";
 import Image16 from "../assets/img/hotelbooking/16.svg";
 import ImageVisa from "../assets/img/hotelbooking/visa.svg";
 import ImageMastercard from "../assets/img/hotelbooking/mastercard.svg";
 import ImageExpresscard from "../assets/img/hotelbooking/expresscard.svg";
-import Image12 from "../assets/img/hotelbooking/12.svg";
 
 const HotelBooking = () => {
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+
+  const checkInDate = queryParams.get("checkIn");
+  const checkOutDate = queryParams.get("checkOut");
+
+  let daysDiff = 0;
+  if (checkInDate && checkOutDate) {
+    const checkIn = new Date(checkInDate);
+    const checkOut = new Date(checkOutDate);
+
+    const timeDiff = checkOut.getTime() - checkIn.getTime();
+    daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Convert ms to days
+
+    console.log("Total nights:", daysDiff);
+  }
+  const formatFullDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    });
+  };
+
+  const formattedcheckInDate = formatFullDate(checkInDate);
+  const formattedcheckOutDate = formatFullDate(checkOutDate);
+  // State for form data
+  const [formData, setFormData] = useState({
+    guestName: "",
+    guestEmail: "",
+    guestMobile: "",
+    paymentMethod: "card",
+    specialRequests: [],
+    couponCode: "",
+    gstNumber: ""
+  });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+    if (token && username) {
+      setFormData((guestName) => ({
+        ...username
+      }));
+    }
+  }, []);
+
+  // State for booking status
+  const [bookingStatus, setBookingStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  // Handle checkbox changes for special requests
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    let updatedRequests = [...formData.specialRequests];
+
+    if (checked) {
+      updatedRequests.push(value);
+    } else {
+      updatedRequests = updatedRequests.filter((item) => item !== value);
+    }
+
+    setFormData({
+      ...formData,
+      specialRequests: updatedRequests
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const bookingData = {
+        hotelId: 39684676,
+        checkInDate: "2025-06-10",
+        checkOutDate: "2025-06-13",
+        totalPrice: 48500.0,
+        paymentMethod: formData.paymentMethod,
+        specialRequests: formData.specialRequests.join(", "),
+        bookingSource: "WebApp",
+        couponCode: formData.couponCode,
+        gstNumber: formData.gstNumber,
+        status: "Pending",
+        rooms: [
+          {
+            roomId: "201771164",
+            adults: 2,
+            children: 1,
+            price: 18500.0
+          }
+        ]
+      };
+
+      const response = await axios.post(
+        "http://api.stayigo.com/v1.0/bookings",
+        bookingData,
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+
+      setBookingStatus({
+        success: true,
+        message:
+          "Booking successful! Your booking ID is: " + response.data.bookingId
+      });
+    } catch (error) {
+      console.error("Booking error:", error);
+      setBookingStatus({
+        success: false,
+        message: "Booking failed. Please try again."
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Set payment method
+  const setPaymentMethod = (method) => {
+    setFormData({
+      ...formData,
+      paymentMethod: method
+    });
+  };
+
   return (
-    <div className="bg-dark text-white min-vh-100 py-4">
+    <div className="bg-dark text-white min-vh-100 py-4 text-start">
       <div className="container">
         {/* Card start */}
         <div className="card rounded-4" style={{ backgroundColor: "#2a2c31" }}>
@@ -49,19 +188,19 @@ const HotelBooking = () => {
               </div>
             </div>
             {/* Right section with image */}
-            <div className="col-sm-3 text-end d-none d-sm-block  ">
+            <div className="col-sm-3 text-end d-none d-sm-block">
               <img src={Image17} className="mb-n4 w-75" alt="" />
             </div>
           </div>
         </div>
       </div>
-      {/* Card end */}
 
       {/* Page content */}
       <div className="container mt-4">
         <div className="row g-4 g-lg-5">
           <div className="col-xl-8">
             <div className="vstack gap-5">
+              {/* Hotel Information Card */}
               <div
                 className="card shadow"
                 style={{ backgroundColor: "#191b1d", color: "#fff" }}
@@ -125,7 +264,9 @@ const HotelBooking = () => {
                         <h6 className="fw-light small mb-1 text-start">
                           Check-in
                         </h6>
-                        <h5 className="mb-1 text-start">4 March 2022</h5>
+                        <h5 className="mb-1 text-start">
+                          {formattedcheckInDate}
+                        </h5>
                         <small className="opacity-50 text-start">
                           <i className="bi bi-alarm me-1"></i>12:30 pm
                         </small>
@@ -134,7 +275,7 @@ const HotelBooking = () => {
                     <div className="col-lg-4">
                       <div className="bg-dark py-3 px-4 rounded-3 text-start">
                         <h6 className="fw-light small mb-1">Check out</h6>
-                        <h5 className="mb-1">8 March 2022</h5>
+                        <h5 className="mb-1">{formattedcheckOutDate}</h5>
                         <small>
                           <i className="bi bi-alarm me-1"></i>4:30 pm
                         </small>
@@ -147,14 +288,14 @@ const HotelBooking = () => {
                         </h6>
                         <h5 className="mb-1">2 G - 1 R</h5>
                         <small>
-                          <i className="bi bi-brightness-high me-1"></i>3 Nights
-                          - 4 Days
+                          <i className="bi bi-brightness-high me-1"></i>
+                          {daysDiff} Nights - {daysDiff} Days
                         </small>
                       </div>
                     </div>
                   </div>
                   <div
-                    className="card border mt-4 "
+                    className="card border mt-4"
                     style={{ backgroundColor: "#191b1d", color: "#fff" }}
                   >
                     <div className="card-header border-bottom d-md-flex justify-content-md-between">
@@ -171,10 +312,10 @@ const HotelBooking = () => {
                     >
                       <h6>Price Included</h6>
                       <ul
-                        className=" list-group-borderless mb-0 mt-2"
+                        className="list-group-borderless mb-0 mt-2"
                         style={{ backgroundColor: "#191b1d", color: "#fff" }}
                       >
-                        <li className="list-group-item h6 fw-light d-flex mb-2 ">
+                        <li className="list-group-item h6 fw-light d-flex mb-2">
                           <i className="bi bi-patch-check-fill text-success me-2"></i>
                           Free Breakfast and Lunch/Dinner.
                         </li>
@@ -195,6 +336,8 @@ const HotelBooking = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Guest Details Card */}
               <div
                 className="card shadow mt-2"
                 style={{ backgroundColor: "#191b1d", color: "#fff" }}
@@ -209,7 +352,7 @@ const HotelBooking = () => {
                   style={{ backgroundColor: "#191b1d", color: "#fff" }}
                 >
                   <form
-                    class="row g-4"
+                    className="row g-4"
                     style={{ backgroundColor: "#191b1d", color: "#fff" }}
                   >
                     <div className="col-12">
@@ -222,34 +365,46 @@ const HotelBooking = () => {
                       <label className="form-label">Name</label>
                       <input
                         type="text"
-                        className="form-control form-control-lg bg-dark text-white border-secondary"
+                        className="form-control form-control-lg bg-dark text-white border-secondary white-placeholder"
                         placeholder="Enter your name"
+                        name="guestName"
+                        value={formData.guestName}
+                        onChange={handleInputChange}
+                        required
                       />
                     </div>
-
-                    <div class="col-12 text-start">
-                      <Link className="btn nav-link mb-0 p-0 text-primary text-start">
-                        <i class="fa-solid fa-plus me-2"></i>Add New Guest
-                      </Link>
-                    </div>
-                    <div class="col-md-6">
+                    <div className="col-md-6">
                       <label className="form-label">Email id</label>
                       <input
                         type="email"
-                        className="form-control form-control-lg bg-dark text-white border-secondary"
+                        className="form-control form-control-lg bg-dark text-white border-secondary white-placeholder"
                         placeholder="Enter your email"
+                        name="guestEmail"
+                        value={formData.guestEmail}
+                        onChange={handleInputChange}
+                        required
                       />
                       <div id="emailHelp" className="opacity-50">
                         (Booking voucher will be sent to this email ID)
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div className="col-md-6">
                       <label className="form-label">Mobile number</label>
                       <input
                         type="text"
-                        className="form-control form-control-lg bg-dark text-white border-secondary"
+                        className="form-control form-control-lg bg-dark text-white border-secondary white-placeholder "
                         placeholder="Enter your mobile number"
+                        name="guestMobile"
+                        value={formData.guestMobile}
+                        onChange={handleInputChange}
+                        required
                       />
+                    </div>
+
+                    <div className="col-12 text-start">
+                      <Link className="btn nav-link mb-0 p-0 text-primary text-start">
+                        <i className="bi bi-plus me-2"></i>Add New Guest
+                      </Link>
                     </div>
                   </form>
                   <div className="alert alert-info my-4" role="alert">
@@ -261,7 +416,7 @@ const HotelBooking = () => {
                     style={{ backgroundColor: "#191b1d", color: "#fff" }}
                   >
                     <div className="card-header border-bottom">
-                      <h5 class="card-title mb-0 text-start">
+                      <h5 className="card-title mb-0 text-start">
                         Special request
                       </h5>
                     </div>
@@ -271,10 +426,14 @@ const HotelBooking = () => {
                           <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+                            value="Smoking room"
                             id="hotelType1"
+                            onChange={handleCheckboxChange}
                           />
-                          <label className="form-check-label" for="hotelType1">
+                          <label
+                            className="form-check-label"
+                            htmlFor="hotelType1"
+                          >
                             Smoking room
                           </label>
                         </div>
@@ -282,10 +441,14 @@ const HotelBooking = () => {
                           <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+                            value="Late check-in"
                             id="hotelType2"
+                            onChange={handleCheckboxChange}
                           />
-                          <label className="form-check-label" for="hotelType2">
+                          <label
+                            className="form-check-label"
+                            htmlFor="hotelType2"
+                          >
                             Late check-in
                           </label>
                         </div>
@@ -293,10 +456,14 @@ const HotelBooking = () => {
                           <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+                            value="Early check-in"
                             id="hotelType3"
+                            onChange={handleCheckboxChange}
                           />
-                          <label className="form-check-label" for="hotelType3">
+                          <label
+                            className="form-check-label"
+                            htmlFor="hotelType3"
+                          >
                             Early check-in
                           </label>
                         </div>
@@ -304,10 +471,14 @@ const HotelBooking = () => {
                           <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+                            value="Room on a high floor"
                             id="hotelType4"
+                            onChange={handleCheckboxChange}
                           />
-                          <label className="form-check-label" for="hotelType4">
+                          <label
+                            className="form-check-label"
+                            htmlFor="hotelType4"
+                          >
                             Room on a high floor
                           </label>
                         </div>
@@ -315,10 +486,14 @@ const HotelBooking = () => {
                           <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+                            value="Large bed"
                             id="hotelType5"
+                            onChange={handleCheckboxChange}
                           />
-                          <label className="form-check-label" for="hotelType5">
+                          <label
+                            className="form-check-label"
+                            htmlFor="hotelType5"
+                          >
                             Large bed
                           </label>
                         </div>
@@ -326,10 +501,14 @@ const HotelBooking = () => {
                           <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+                            value="Airport transfer"
                             id="hotelType6"
+                            onChange={handleCheckboxChange}
                           />
-                          <label className="form-check-label" for="hotelType6">
+                          <label
+                            className="form-check-label"
+                            htmlFor="hotelType6"
+                          >
                             Airport transfer
                           </label>
                         </div>
@@ -337,10 +516,14 @@ const HotelBooking = () => {
                           <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+                            value="Twin beds"
                             id="hotelType8"
+                            onChange={handleCheckboxChange}
                           />
-                          <label className="form-check-label" for="hotelType8">
+                          <label
+                            className="form-check-label"
+                            htmlFor="hotelType8"
+                          >
                             Twin beds
                           </label>
                         </div>
@@ -349,6 +532,8 @@ const HotelBooking = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Payment Options Card */}
               <div
                 className="card shadow mt-2"
                 style={{ backgroundColor: "#191b1d", color: "#fff" }}
@@ -365,7 +550,7 @@ const HotelBooking = () => {
                   <div className="bg-primary bg-opacity-10 rounded-4 mb-4 p-3">
                     <div className="d-md-flex justify-content-md-between align-items-center">
                       <div className="d-sm-flex align-items-center mb-2 mb-md-0">
-                        <img src={Image16} class="h-50px w-50px" alt="" />
+                        <img src={Image16} className="h-50px w-50px" alt="" />
                         <div className="ms-sm-3 mt-2 mt-sm-0">
                           <h5 className="card-title mb-0 text-start">
                             Get Additional Discount
@@ -378,419 +563,303 @@ const HotelBooking = () => {
                       <Link className="btn btn-primary mb-0">Login now</Link>
                     </div>
                   </div>
-                  {/* Accordion */}
-                  <div
-                    class="accordion accordion-icon accordion-bg-dark"
-                    id="accordioncircle"
-                  >
-                    <div class="accordion-item mb-3 bg-dark text-white">
-                      <h6 class="accordion-header" id="heading-1">
-                        <button
-                          class="accordion-button rounded collapsed bg-dark text-white"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapse-1"
-                          aria-expanded="true"
-                          aria-controls="collapse-1"
+
+                  {/* Booking status message */}
+                  {bookingStatus && (
+                    <div
+                      className={`alert alert-${
+                        bookingStatus.success ? "success" : "danger"
+                      } mb-4`}
+                    >
+                      {bookingStatus.message}
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit}>
+                    <div
+                      className="accordion accordion-icon accordion-bg-dark"
+                      id="accordioncircle"
+                    >
+                      {/* Credit/Debit Card */}
+                      <div className="accordion-item mb-3 bg-dark text-white">
+                        <h6 className="accordion-header" id="heading-1">
+                          <button
+                            className="accordion-button rounded collapsed bg-dark text-white"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse-1"
+                            aria-expanded="true"
+                            aria-controls="collapse-1"
+                            onClick={() => setPaymentMethod("card")}
+                          >
+                            <i className="bi bi-credit-card text-primary me-2"></i>
+                            <span className="me-5">Credit or Debit Card</span>
+                          </button>
+                        </h6>
+                        <div
+                          id="collapse-1"
+                          className="accordion-collapse collapse show"
+                          aria-labelledby="heading-1"
+                          data-bs-parent="#accordioncircle"
                         >
-                          <i class="bi bi-credit-card text-primary me-2"></i>{" "}
-                          <span class="me-5 ">Credit or Debit Card</span>
-                        </button>
-                      </h6>
-                      <div
-                        id="collapse-1"
-                        class="accordion-collapse collapse show"
-                        aria-labelledby="heading-1"
-                        data-bs-parent="#accordioncircle"
-                      >
-                        <div className="accordion-body">
-                          <div className="d-sm-flex justify-content-sm-between my-3">
-                            <h6 className="mb-2 mb-sm-0">We Accept:</h6>
-                            <ul className="list-inline my-0">
-                              <li className="list-inline-item">
-                                <Link to="#">
-                                  <img
-                                    src={ImageVisa}
-                                    className="img-fluid w-100"
-                                    alt="Visa"
-                                    style={{ height: "30px", width: "50px" }}
-                                  />
-                                </Link>
-                              </li>
-                              <li className="list-inline-item">
-                                <Link to="#">
-                                  <img
-                                    src={ImageMastercard}
-                                    className="img-fluid w-100"
-                                    alt="Mastercard"
-                                    style={{ height: "30px", width: "50px" }}
-                                  />
-                                </Link>
-                              </li>
-                              <li className="list-inline-item">
-                                <Link to="#">
-                                  <img
-                                    src={ImageExpresscard}
-                                    className="img-fluid w-100"
-                                    alt="Amex"
-                                    style={{ height: "30px", width: "50px" }}
-                                  />
-                                </Link>
-                              </li>
-                            </ul>
-                          </div>
-
-                          <form className="row g-3">
-                            <div className="col-12">
-                              <label className="form-label">
-                                <span class="h6 fw-normal">Card Number *</span>
-                              </label>
-                              <div className="position-relative">
-                                <input
-                                  type="text"
-                                  className="form-control bg-dark text-white border-secondary placeholder-glow"
-                                  maxlength="14"
-                                  placeholder="XXXX XXXX XXXX XXXX"
-                                />
-                                <img
-                                  className="w-30px position-absolute top-50 end-0 translate-middle-y me-2 d-none d-sm-block"
-                                  alt=""
-                                />
-                              </div>
-                            </div>
-                            <div className="col-md-6">
-                              <label className="form-label">
-                                <span class="h6 fw-normal">
-                                  Expiration date *
-                                </span>
-                              </label>
-                              <div className="input-group">
-                                <input
-                                  type="text"
-                                  className="form-control bg-dark text-white border-secondary"
-                                  maxlength="2"
-                                  placeholder="Month"
-                                />
-                                <input
-                                  type="text"
-                                  className="form-control bg-dark text-white border-secondary"
-                                  maxlength="4"
-                                  placeholder="Year"
-                                />
-                              </div>
-                            </div>
-                            <div className="col-md-6">
-                              <label className="form-label">
-                                <span class="h6 fw-normal">CVV / CVC *</span>
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-dark text-white border-secondary"
-                                maxlength="3"
-                                placeholder="xxx"
-                              />
-                            </div>
-                            <div className="col-12">
-                              <label className="form-label">
-                                <span class="h6 fw-normal">Name on Card *</span>
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-dark text-white border-secondary"
-                                aria-label="name of card holder"
-                                placeholder="Enter card holder name"
-                              />
-                            </div>
-
-                            <div className="col-12">
-                              <div
-                                className="alert alert-success alert-dismissible fade show my-3"
-                                role="alert"
-                              >
-                                <div className="d-sm-flex align-items-center mb-3">
-                                  <img
-                                    src={Image12}
-                                    className="w-40px me-3 mb-2 mb-sm-0"
-                                    alt=""
-                                    style={{ height: "50px", width: "70px" }}
-                                  />
-                                  <h5 className="alert-heading mb-0">
-                                    $50,000 Covid Cover &amp; More
-                                  </h5>
-                                </div>
-
-                                <p className="mb-2">
-                                  Aww yeah, you successfully read this important
-                                  alert message. This example text is going to
-                                  run a bit longer so that you can see how
-                                  spacing within an alert works with this kind
-                                  of content.
-                                </p>
-
-                                <div className="d-sm-flex align-items-center">
-                                  <Link
-                                    href="#"
-                                    className="btn btn-sm btn-success mb-2 mb-sm-0 me-3"
-                                  >
-                                    <i clasName="fa-regular fa-plus me-2"></i>
-                                    Add
+                          <div className="accordion-body">
+                            <div className="d-sm-flex justify-content-sm-between my-3">
+                              <h6 className="mb-2 mb-sm-0">We Accept:</h6>
+                              <ul className="list-inline my-0">
+                                <li className="list-inline-item">
+                                  <Link to="#">
+                                    <img
+                                      src={ImageVisa}
+                                      className="img-fluid w-100"
+                                      alt="Visa"
+                                      style={{ height: "30px", width: "50px" }}
+                                    />
                                   </Link>
-                                  <h6 class="mb-0">$69 per person</h6>
-                                </div>
+                                </li>
+                                <li className="list-inline-item">
+                                  <Link to="#">
+                                    <img
+                                      src={ImageMastercard}
+                                      className="img-fluid w-100"
+                                      alt="Mastercard"
+                                      style={{ height: "30px", width: "50px" }}
+                                    />
+                                  </Link>
+                                </li>
+                                <li className="list-inline-item">
+                                  <Link to="#">
+                                    <img
+                                      src={ImageExpresscard}
+                                      className="img-fluid w-100"
+                                      alt="Amex"
+                                      style={{ height: "30px", width: "50px" }}
+                                    />
+                                  </Link>
+                                </li>
+                              </ul>
+                            </div>
 
-                                <button
-                                  type="button"
-                                  className="btn-close"
-                                  data-bs-dismiss="alert"
-                                  aria-label="Close"
-                                ></button>
+                            <div className="row g-3">
+                              <div className="col-12">
+                                <label className="form-label">
+                                  <span className="h6 fw-normal">
+                                    Card Number *
+                                  </span>
+                                </label>
+                                <div className="position-relative">
+                                  <input
+                                    type="text"
+                                    className="form-control bg-dark text-white border-secondary white-placeholder"
+                                    maxLength="16"
+                                    placeholder="XXXX XXXX XXXX XXXX"
+                                    required={formData.paymentMethod === "card"}
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-md-6">
+                                <label className="form-label">
+                                  <span className="h6 fw-normal">
+                                    Expiration date *
+                                  </span>
+                                </label>
+                                <div className="input-group">
+                                  <input
+                                    type="text"
+                                    className="form-control bg-dark text-white border-secondary white-placeholder"
+                                    maxLength="2"
+                                    placeholder="MM"
+                                    required={formData.paymentMethod === "card"}
+                                  />
+                                  <input
+                                    type="text"
+                                    className="form-control bg-dark text-white border-secondary white-placeholder"
+                                    maxLength="4"
+                                    placeholder="YYYY"
+                                    required={formData.paymentMethod === "card"}
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-md-6">
+                                <label className="form-label">
+                                  <span className="h6 fw-normal">
+                                    CVV / CVC *
+                                  </span>
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control bg-dark text-white border-secondary white-placeholder"
+                                  maxLength="3"
+                                  placeholder="xxx"
+                                  required={formData.paymentMethod === "card"}
+                                />
+                              </div>
+                              <div className="col-12">
+                                <label className="form-label">
+                                  <span className="h6 fw-normal">
+                                    Name on Card *
+                                  </span>
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control bg-dark text-white border-secondary white-placeholder"
+                                  placeholder="Enter card holder name"
+                                  required={formData.paymentMethod === "card"}
+                                />
                               </div>
                             </div>
-                            <div className="col-12">
-                              <div className="d-sm-flex justify-content-sm-between align-items-center">
-                                <h4>
-                                  $1800{" "}
-                                  <span className="small fs-6">Due now</span>
-                                </h4>
-                                <button className="btn btn-primary mb-0">
-                                  Pay Now
-                                </button>
-                              </div>
-                            </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="accordion-item mb-3 bg-transparent">
-                      <h6 className="accordion-header" id="heading-2">
-                        <button
-                          className="accordion-button collapsed rounded bg-dark text-white"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapse-2"
-                          aria-expanded="false"
-                          aria-controls="collapse-2"
-                        >
-                          <i className="bi bi-globe2 text-primary me-2"></i>{" "}
-                          <span class="me-5">Pay with Net Banking</span>
-                        </button>
-                      </h6>
-                      <div
-                        id="collapse-2"
-                        class="accordion-collapse collapse bg-dark text-white"
-                        aria-labelledby="heading-2"
-                        data-bs-parent="#accordioncircle"
-                      >
-                        <div className="accordion-body">
-                          <form className="row g-3 mt-1">
-                            <ul className="list-inline mb-0">
-                              <li className="list-inline-item">
-                                {" "}
-                                <h6 class="mb-0">Popular Bank:</h6>{" "}
-                              </li>
-                              <li className="list-inline-item">
-                                <input
-                                  type="radio"
-                                  className="btn-check"
-                                  name="options"
-                                  id="option1"
-                                />
-                                <label
-                                  className="btn btn-light btn-primary-soft-check"
-                                  for="option1"
-                                >
-                                  <img
-                                    src="assets/images/element/13.svg"
-                                    className="h-20px me-2"
-                                    alt=""
-                                  />
-                                  Bank of America
-                                </label>
-                              </li>
-                              <li className="list-inline-item">
-                                <input
-                                  type="radio"
-                                  class="btn-check"
-                                  name="options"
-                                  id="option2"
-                                />
-                                <label
-                                  className="btn btn-light btn-primary-soft-check"
-                                  for="option2"
-                                >
-                                  <img
-                                    src="assets/images/element/15.svg"
-                                    className="h-20px me-2"
-                                    alt=""
-                                  />
-                                  Bank of Japan
-                                </label>
-                              </li>
-                              <li className="list-inline-item">
-                                <input
-                                  type="radio"
-                                  className="btn-check"
-                                  name="options"
-                                  id="option3"
-                                />
-                                <label
-                                  className="btn btn-light btn-primary-soft-check"
-                                  for="option3"
-                                >
-                                  <img
-                                    src="assets/images/element/14.svg"
-                                    className="h-20px me-2"
-                                    alt=""
-                                  />
-                                  VIVIV Bank
-                                </label>
-                              </li>
-                            </ul>
 
-                            <p className="mb-1">
-                              In order to complete your transaction, we will
-                              transfer you over to Booking secure servers.
-                            </p>
-                            <p className="my-0">
-                              Select your bank from the drop-down list and click
-                              proceed to continue with your payment.
-                            </p>
-                            <div className="col-md-6">
-                              <div className="choices">
-                                <div class="choices__inner">
-                                  <select
-                                    class="form-select form-select-sm js-choice border-0 choices__input"
-                                    hidden=""
-                                    tabindex="-1"
-                                    data-choice="active"
+                      {/* Net Banking */}
+                      <div className="accordion-item mb-3 bg-transparent">
+                        <h6 className="accordion-header" id="heading-2">
+                          <button
+                            className="accordion-button collapsed rounded bg-dark text-white "
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse-2"
+                            aria-expanded="false"
+                            aria-controls="collapse-2"
+                            onClick={() => setPaymentMethod("netbanking")}
+                          >
+                            <i className="bi bi-globe2 text-primary me-2"></i>
+                            <span className="me-5">Pay with Net Banking</span>
+                          </button>
+                        </h6>
+                        <div
+                          id="collapse-2"
+                          className="accordion-collapse collapse bg-dark text-white"
+                          aria-labelledby="heading-2"
+                          data-bs-parent="#accordioncircle"
+                        >
+                          <div className="accordion-body">
+                            <div className="row g-3 mt-1">
+                              <ul className="list-inline mb-0">
+                                <li className="list-inline-item">
+                                  <h6 className="mb-0">Popular Bank:</h6>
+                                </li>
+                                <li className="list-inline-item">
+                                  <input
+                                    type="radio"
+                                    className="btn-check"
+                                    name="bankOptions"
+                                    id="option1"
+                                  />
+                                  <label
+                                    className="btn btn-light btn-primary-soft-check"
+                                    htmlFor="option1"
                                   >
-                                    <option
-                                      value=""
-                                      data-custom-properties="[object Object]"
-                                    >
-                                      Please choose one
-                                    </option>
-                                  </select>
-                                  <div class="choices__list choices__list--single">
-                                    <div
-                                      class="choices__item choices__placeholder choices__item--selectable"
-                                      data-item=""
-                                      data-id="1"
-                                      data-value=""
-                                      data-custom-properties="[object Object]"
-                                      aria-selected="true"
-                                    >
-                                      Please choose one
-                                    </div>
-                                  </div>
-                                </div>
-                                <div
-                                  class="choices__list choices__list--dropdown"
-                                  aria-expanded="false"
-                                >
-                                  <div class="choices__list" role="listbox">
-                                    <div
-                                      id="choices--t1s6-item-choice-1"
-                                      class="choices__item choices__item--choice is-selected choices__placeholder choices__item--selectable is-highlighted"
-                                      role="option"
-                                      data-choice=""
-                                      data-id="1"
-                                      data-value=""
-                                      data-select-text="Press to select"
-                                      data-choice-selectable=""
-                                      aria-selected="true"
-                                    >
-                                      Please choose one
-                                    </div>
-                                    <div
-                                      id="choices--t1s6-item-choice-2"
-                                      class="choices__item choices__item--choice choices__item--selectable"
-                                      data-choice=""
-                                      data-id="2"
-                                      data-value="Bank of America"
-                                      data-select-text="Press to select"
-                                      data-choice-selectable=""
-                                    >
-                                      Bank of America
-                                    </div>
-                                    <div
-                                      id="choices--t1s6-item-choice-3"
-                                      class="choices__item choices__item--choice choices__item--selectable"
-                                      data-choice=""
-                                      data-id="3"
-                                      data-value="Bank of India"
-                                      data-select-text="Press to select"
-                                      data-choice-selectable=""
-                                    >
-                                      Bank of India
-                                    </div>
-                                    <div
-                                      id="choices--t1s6-item-choice-4"
-                                      class="choices__item choices__item--choice choices__item--selectable"
-                                      data-choice=""
-                                      data-id="4"
-                                      data-value="Bank of London"
-                                      data-select-text="Press to select"
-                                      data-choice-selectable=""
-                                    >
-                                      Bank of London
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                                    Bank of America
+                                  </label>
+                                </li>
+                                <li className="list-inline-item">
+                                  <input
+                                    type="radio"
+                                    className="btn-check"
+                                    name="bankOptions"
+                                    id="option2"
+                                  />
+                                  <label
+                                    className="btn btn-light btn-primary-soft-check"
+                                    htmlFor="option2"
+                                  >
+                                    Bank of Japan
+                                  </label>
+                                </li>
+                              </ul>
                             </div>
-                            <div class="d-grid">
-                              <button className="btn btn-success mb-0">
-                                Pay $1800
-                              </button>
-                            </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="accordion-item mb-3 bg-transparent text-white">
-                      <h6 className="accordion-header" id="heading-3">
-                        <button
-                          className="accordion-button collapsed rounded bg-dark text-white"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapse-3"
-                          aria-expanded="false"
-                          aria-controls="collapse-3"
+
+                      {/* PayPal */}
+                      <div className="accordion-item mb-3 bg-transparent text-white">
+                        <h6 className="accordion-header" id="heading-3">
+                          <button
+                            className="accordion-button collapsed rounded bg-dark text-white"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse-3"
+                            aria-expanded="false"
+                            aria-controls="collapse-3"
+                            onClick={() => setPaymentMethod("paypal")}
+                          >
+                            <i className="bi bi-paypal text-primary me-2"></i>
+                            <span className="me-5">Pay with Paypal</span>
+                          </button>
+                        </h6>
+                        <div
+                          id="collapse-3"
+                          className="accordion-collapse collapse bg-dark text-white"
+                          aria-labelledby="heading-3"
+                          data-bs-parent="#accordioncircle"
                         >
-                          <i className="bi bi-paypal text-primary me-2"></i>
-                          <span class="me-5">Pay with Paypal</span>
-                        </button>
-                      </h6>
-                      <div
-                        id="collapse-3"
-                        className="accordion-collapse collapse bg-dark text-white"
-                        aria-labelledby="heading-3"
-                        data-bs-parent="#accordioncircle"
-                      >
-                        <div className="accordion-body">
-                          <div className="card card-body border align-items-center text-center mt-4 bg-dark text-white">
-                            <img
-                              src="assets/images/element/paypal.svg"
-                              class="h-70px mb-3"
-                              alt=""
-                            />
-                            <p className="mb-3">
-                              <strong>Tips:</strong> Simply click on the payment
-                              button below to proceed to the PayPal payment
-                              page.
-                            </p>
-                            <Link
-                              to="#"
-                              className="btn btn-sm btn-outline-primary mb-0"
-                            >
-                              Pay with paypal
-                            </Link>
+                          <div className="accordion-body">
+                            <div className="card card-body border align-items-center text-center mt-4 bg-dark text-white">
+                              <p className="mb-3">
+                                <strong>Tips:</strong> Simply click on the
+                                payment button below to proceed to the PayPal
+                                payment page.
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+
+                    {/* GST Number Field */}
+                    <div className="mb-3">
+                      <label className="form-label">
+                        GST Number (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control form-control-lg bg-dark text-white border-secondary white-placeholder"
+                        placeholder="Enter GST Number"
+                        name="gstNumber"
+                        value={formData.gstNumber}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+
+                    {/* Coupon Code */}
+                    <div className="mb-3">
+                      <label className="form-label">
+                        Coupon Code (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control form-control-lg bg-dark text-white border-secondary white-placeholder"
+                        placeholder="Enter coupon code"
+                        name="couponCode"
+                        value={formData.couponCode}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className="d-grid mt-4">
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-lg"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          <>
+                            <span
+                              className="spinner-border spinner-border-sm me-2"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Processing...
+                          </>
+                        ) : (
+                          "Confirm Booking"
+                        )}
+                      </button>
+                    </div>
+                  </form>
                 </div>
                 <div className="card-footer p-4 pt-0">
                   <p className="mb-0 text-start">
@@ -801,17 +870,19 @@ const HotelBooking = () => {
               </div>
             </div>
           </div>
+
+          {/* Right Sidebar */}
           <aside className="col-xl-4">
             <div className="row g-4">
               <div className="col-md-6 col-xl-12">
                 <div
-                  className="card shadow rounded-2 "
+                  className="card shadow rounded-2"
                   style={{ backgroundColor: "#191b1d", color: "#fff" }}
                 >
                   <div className="card-header border-bottom">
                     <h5 className="card-title mb-0">Price Summary</h5>
                   </div>
-                  <div className="card-body ">
+                  <div className="card-body">
                     <ul
                       className=""
                       style={{ backgroundColor: "#191b1d", color: "#fff" }}
@@ -820,10 +891,10 @@ const HotelBooking = () => {
                         <span className="h6 fw-light mb-0">Room Charges</span>
                         <span className="fs-5">$28,660</span>
                       </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <li className="list-group-item d-flex justify-content-between align-items-center">
                         <span className="h6 fw-light mb-0">
                           Total Discount
-                          <span class="badge text-bg-danger smaller mb-0 ms-2">
+                          <span className="badge text-bg-danger smaller mb-0 ms-2">
                             10% off
                           </span>
                         </span>
@@ -872,7 +943,7 @@ const HotelBooking = () => {
                         />
                         <label
                           className="form-check-label h5 mb-0"
-                          for="discount1"
+                          htmlFor="discount1"
                         >
                           GSTBOOK
                         </label>
@@ -883,10 +954,13 @@ const HotelBooking = () => {
                       </div>
                     </div>
 
-                    <div class="input-group mt-3">
+                    <div className="input-group mt-3">
                       <input
-                        className="form-control form-control bg-dark text-white"
+                        className="form-control form-control bg-dark text-white white-placeholder"
                         placeholder="Coupon code"
+                        name="couponCode"
+                        value={formData.couponCode}
+                        onChange={handleInputChange}
                       />
                       <button type="button" className="btn btn-primary">
                         Apply
@@ -910,19 +984,19 @@ const HotelBooking = () => {
                       style={{ backgroundColor: "#191b1d", color: "#fff" }}
                     >
                       <li className="list-group-item d-flex mb-0">
-                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <i className="fa-solid fa-check text-success me-2"></i>
                         <span className="h6 fw-normal">
                           Get Access to Secret Deal
                         </span>
                       </li>
 
                       <li className="list-group-item d-flex mb-0">
-                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <i className="fa-solid fa-check text-success me-2"></i>
                         <span className="h6 fw-normal">Book Faster</span>
                       </li>
 
                       <li className="list-group-item d-flex mb-0">
-                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <i className="fa-solid fa-check text-success me-2"></i>
                         <span className="h6 fw-normal">
                           Manage Your Booking
                         </span>

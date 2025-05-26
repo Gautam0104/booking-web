@@ -8,16 +8,16 @@ const RoomDetail = () => {
   const slides = [
     [
       "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/e2babf65_b.jpg",
-      "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/9d895b4d_b.jpg",
+      "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/9d895b4d_b.jpg"
     ],
     [
       "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/65051724_b.jpg",
-      "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/15552c8e_b.jpg",
+      "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/15552c8e_b.jpg"
     ],
     [
       "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/dc7f9f93_b.jpg",
-      "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/b50de7f6_b.jpg",
-    ],
+      "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/b50de7f6_b.jpg"
+    ]
   ];
 
   return (
@@ -55,7 +55,7 @@ const RoomDetail = () => {
                         zIndex: 10,
                         padding: "8px 12px",
                         borderRadius: "20px",
-                        opacity: 0.8,
+                        opacity: 0.8
                       }}
                       onClick={() => window.open(src, "_blank")}
                     >
