@@ -1,10 +1,16 @@
 import React from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-
+import { useLocation } from "react-router-dom";
 import RoomSelection from "../layout/hotel/roomdetail/RoomSelection";
 import "../styles/RoomDetail.css";
 
 const RoomDetail = () => {
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const hotelName = queryParams.get("hotelName");
+
+  const hotelLocationline1 = queryParams.get("hotelLocationline1");
+  const hotelLocationline2 = queryParams.get("hotelLocationline2");
   const slides = [
     [
       "https://i.travelapi.com/lodging/19000000/18970000/18965700/18965604/e2babf65_b.jpg",
@@ -22,10 +28,10 @@ const RoomDetail = () => {
 
   return (
     <div className="container my-5">
-      <h2 className="fw-bold text-white">Luxury Room with Balcony</h2>
+      <h2 className="fw-bold text-white">{hotelName}</h2>
       <p className="text-white opacity-75">
         <FaMapMarkerAlt className="me-2" />
-        Vibhuti Khand, Gomti Nagar
+        {hotelLocationline1}, {hotelLocationline2}
       </p>
 
       <div id="roomCarousel" className="carousel slide" data-bs-ride="carousel">

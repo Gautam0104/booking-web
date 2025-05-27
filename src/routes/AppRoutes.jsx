@@ -17,8 +17,26 @@ import Dashboard from "../pages/Dashboard";
 import Account from "../pages/Acount";
 import CompleteProfile from "../pages/CompleteProfile";
 import Location from "../pages/Location";
+import Payment from "../pages/Payment";
+import BookingList from "../pages/BookingList";
+import BookingConfirm from "../pages/BookingConfirm";
 
 const AppRoutes = () => {
+  const exampleBooking = {
+    hotelId: 39684676,
+    checkInDate: "2025-06-10T00:00:00.000Z",
+    checkOutDate: "2025-06-13T00:00:00.000Z",
+    totalPrice: "48500.00",
+    paymentMethod: "cash",
+    couponCode: "GROUP2025",
+    specialRequests: "Quiet rooms, away from elevators",
+    bookingSource: "WebApp",
+    rooms: [
+      { roomId: "201771164", adults: 2, children: 1, price: "18500.00" },
+      { roomId: "325711554", adults: 2, children: 0, price: "15000.00" },
+      { roomId: "201911333", adults: 1, children: 0, price: "15000.00" }
+    ]
+  };
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard/home" replace />} />
@@ -28,6 +46,11 @@ const AppRoutes = () => {
       />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/payment" element={<Payment />} />
+      <Route
+        path="/bookingconfirm"
+        element={<BookingConfirm booking={exampleBooking} />}
+      />
 
       <Route path="/dashboard" element={<Dashboard />}>
         <Route path="home" element={<Home />} />
@@ -45,6 +68,7 @@ const AppRoutes = () => {
         <Route path="apitest" element={<List />} />
         <Route path="booking-web" element={<Home />} />
         <Route path="location" element={<Location />} />
+        <Route path="bookinglist" element={<BookingList />} />
       </Route>
     </Routes>
   );

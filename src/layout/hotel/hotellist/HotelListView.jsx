@@ -180,9 +180,15 @@ export const HotelListView = () => {
     return <p className="text-white">No hotels found for this search.</p>;
 
   const currencySymbol = "₹";
-  const selectRoom = (hotelId) => {
+  const selectRoom = (
+    hotelId,
+    hotelName,
+    hotelPrice,
+    locationline1,
+    locationline2
+  ) => {
     navigate(
-      `/dashboard/roomdetail?id=${hotelId}&location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}`
+      `/dashboard/roomdetail?id=${hotelId}&hotelName=${hotelName}&hotelPrice=${hotelPrice}&hotelLocationline1=${locationline1}&hotelLocationline2=${locationline2}&location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}`
     );
   };
 
@@ -911,7 +917,16 @@ export const HotelListView = () => {
                             </div>
                             <button
                               className="btn btn-primary"
-                              onClick={() => selectRoom(hotel.id)}
+                              onClick={() =>
+                                selectRoom(
+                                  hotel.id,
+                                  hotel.name,
+                                  hotel.availability?.rate?.finalRate,
+
+                                  hotel.contact?.address?.line1,
+                                  hotel.contact?.address?.line2
+                                )
+                              }
                             >
                               Select Room
                             </button>

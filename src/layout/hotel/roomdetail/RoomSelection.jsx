@@ -18,6 +18,12 @@ const RoomSelection = () => {
   const location = queryParams.get("location");
   const checkInDate = queryParams.get("checkIn");
   const checkOutDate = queryParams.get("checkOut");
+  const hotelId = queryParams.get("id");
+  const hotelPrice = queryParams.get("hotelPrice");
+  const hotelName = queryParams.get("hotelName");
+
+  const addressLine1 = queryParams.get("hotelLocationline1");
+  const addressLine2 = queryParams.get("hotelLocationline2");
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState(1);
@@ -65,7 +71,7 @@ const RoomSelection = () => {
                     size="315 sq.ft"
                     view="City view"
                     bed="King Bed"
-                    price="₹5210"
+                    price={`₹${hotelPrice}`}
                   />
 
                   <RoomCard
@@ -90,11 +96,12 @@ const RoomSelection = () => {
             <div className="card border text-start bg-dark text-white">
               <div className="card-header bg-dark text-white border-bottom">
                 <h5 className="card-title mb-0">
-                  ₹1509 <del className=" ms-2">₹7835</del>
+                  ₹{hotelPrice}
+                  {/* <del className=" ms-2">₹7835</del>
                   <span className="badge bg-warning text-dark ms-2">
                     80% off
                   </span>
-                  <small className="d-block ">+ taxes & fees: ₹266</small>
+                  <small className="d-block ">+ taxes & fees: ₹266</small> */}
                 </h5>
               </div>
 
@@ -210,15 +217,15 @@ const RoomSelection = () => {
                 <ul className="list-group mb-3 bg-dark text-white">
                   <li className="list-group-item d-flex justify-content-between align-items-center bg-dark text-white">
                     OYOFAMSTAY coupon applied
-                    <span className="text-success">-₹2013 ✅</span>
+                    <span className="text-success">-₹2013 </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center bg-dark text-white">
                     OYO Money applied <small>(₹379 OYO Xtra)</small>
-                    <span className="text-success">-₹379 ✅</span>
+                    <span className="text-success">-₹379 </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center bg-dark text-white">
                     Save 5% with Wizard membership
-                    <span className="text-success">-₹95 ✅</span>
+                    <span className="text-success">-₹95 </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center bg-dark text-white">
                     Wizard Blue membership charge
@@ -238,7 +245,7 @@ const RoomSelection = () => {
                   </h6>
                   <h5 className="d-flex justify-content-between">
                     <strong>Total price</strong>
-                    <strong>₹1775</strong>
+                    <strong>₹{hotelPrice}</strong>
                   </h5>
                   <small className="text-muted">Including taxes & fees</small>
                 </div>
@@ -246,7 +253,7 @@ const RoomSelection = () => {
                 {/* Call to Action */}
                 <div className="d-grid">
                   <Link
-                    to={`/dashboard/hotelbooking?location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}`}
+                    to={`/dashboard/hotelbooking?hotelId=${hotelId}&location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}&hotelPrice=${hotelPrice}&adults=${adults}&children=${children}&rooms=${rooms}&hotelName=${hotelName}&hotelAddress1=${addressLine1}&hotelAddress2=${addressLine2}`}
                     className="btn btn-primary btn-lg"
                   >
                     Continue to Book
