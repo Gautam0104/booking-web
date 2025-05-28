@@ -162,6 +162,10 @@ const HotelBooking = () => {
         title: "Booking Confirmed!",
         text: `Your booking ID is: ${response.data.bookingId}`,
         confirmButtonColor: "#3085d6"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate(`/payment`);
+        }
       });
     } catch (error) {
       console.error("Booking error:", error.response?.data || error.message);
@@ -170,10 +174,6 @@ const HotelBooking = () => {
         title: "Booking Failed",
         text: "Please try again later.",
         confirmButtonColor: "#d33"
-      }).then(function (result) {
-        if (result.isConfirmed) {
-          navigate(`/payment`);
-        }
       });
     } finally {
       setIsLoading(false);

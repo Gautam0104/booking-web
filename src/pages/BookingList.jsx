@@ -4,6 +4,7 @@ import axios from "axios";
 const BookingList = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [cancellingId, setCancellingId] = useState(null);
 
   useEffect(() => {
     fetchBookings();
@@ -14,15 +15,40 @@ const BookingList = () => {
       const response = await axios.get("https://api.stayigo.com/v1.0/bookings");
       console.log("API raw response:", response);
 
-      // Correctly access bookings array
       const bookingData = response.data?.bookings ?? [];
-
       console.log("Processed bookings:", bookingData);
       setBookings(bookingData);
     } catch (error) {
       console.error("Error fetching bookings:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const cancelBooking = async (bookingId) => {
+    if (!window.confirm("Are you sure you want to cancel this booking?"))
+      return;
+
+    try {
+      setCancellingId(bookingId);
+      // Replace this URL with your actual cancel endpoint
+      await axios.post(
+        `https://api.stayigo.com/v1.0/bookings/${bookingId}/cancel`
+      );
+      // Optional: update the UI after cancellation
+      setBookings((prev) =>
+        prev.map((booking) =>
+          booking.id === bookingId
+            ? { ...booking, status: "Cancelled" }
+            : booking
+        )
+      );
+      alert("Booking cancelled successfully.");
+    } catch (error) {
+      console.error("Error cancelling booking:", error);
+      alert("Failed to cancel the booking.");
+    } finally {
+      setCancellingId(null);
     }
   };
 
@@ -70,6 +96,8 @@ const BookingList = () => {
                     <th>Total Price</th>
                     <th>Payment Method</th>
                     <th>Coupon</th>
+                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -88,6 +116,22 @@ const BookingList = () => {
                       </td>
                       <td>{booking.paymentMethod}</td>
                       <td>{booking.couponCode || "N/A"}</td>
+                      <td>{booking.status || "Confirmed"}</td>
+                      <td>
+                        {booking.status === "Cancelled" ? (
+                          <span className="text-danger">Cancelled</span>
+                        ) : (
+                          <button
+                            className="btn btn-sm btn-danger"
+                            disabled={cancellingId === booking.id}
+                            onClick={() => cancelBooking(booking.id)}
+                          >
+                            {cancellingId === booking.id
+                              ? "Cancelling..."
+                              : "Cancel"}
+                          </button>
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
