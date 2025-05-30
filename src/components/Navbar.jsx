@@ -48,7 +48,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const naviHome = () => {
-    navigate(`/dashboard/home`);
+    navigate(`/`);
   };
 
   const handleLogout = () => {
@@ -117,7 +117,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/dashboard/hotellist"
+                        to="/hotellist"
                         onClick={closeMenu}
                       >
                         Hotel List
@@ -126,7 +126,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/dashboard/hotelgrid"
+                        to="/hotelgrid"
                         onClick={closeMenu}
                       >
                         Hotel Grid
@@ -135,7 +135,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/dashboard/hoteldetail"
+                        to="/hoteldetail"
                         onClick={closeMenu}
                       >
                         Hotel Detail
@@ -144,7 +144,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/dashboard/roomdetail"
+                        to="/roomdetail"
                         onClick={closeMenu}
                       >
                         Room Detail
@@ -153,7 +153,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/dashboard/hotelresort"
+                        to="/hotelresort"
                         onClick={closeMenu}
                       >
                         Hotel Resort
@@ -162,7 +162,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/dashboard/hotelchain"
+                        to="/hotelchain"
                         onClick={closeMenu}
                       >
                         Hotel Chain
@@ -171,7 +171,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/dashboard/hotelbooking"
+                        to="/hotelbooking"
                         onClick={closeMenu}
                       >
                         Hotel Booking
@@ -182,7 +182,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     className="dropdown-item"
-                    to="/dashboard/apartments"
+                    to="/apartments"
                     onClick={closeMenu}
                   >
                     <span className="d-flex align-items-center justify-content-between">
@@ -193,7 +193,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     className="dropdown-item"
-                    to="/dashboard/tours"
+                    to="/tours"
                     onClick={closeMenu}
                   >
                     <span className="d-flex align-items-center justify-content-between">
@@ -219,7 +219,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/dashboard/blog"
+                        to="/blog"
                         onClick={closeMenu}
                       >
                         Blog
@@ -228,7 +228,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         className="dropdown-item"
-                        to="/dashboard/blogdetail"
+                        to="/blogdetail"
                         onClick={closeMenu}
                       >
                         Blog Detail
@@ -319,13 +319,13 @@ const Navbar = () => {
                       </div>
                       <Link
                         className="dropdown-item d-flex align-items-center gap-2 px-3"
-                        to="/dashboard/account"
+                        to="/account"
                       >
                         <i className="bi bi-person" /> My Profile
                       </Link>
                       <Link
                         className="dropdown-item d-flex align-items-center gap-2 px-3"
-                        to="/dashboard/bookinglist"
+                        to="/bookinglist"
                       >
                         <i className="bi bi-credit-card" /> My Bookings
                       </Link>

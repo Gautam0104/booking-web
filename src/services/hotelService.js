@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "./api";
 
 export const fetchHotelsByLocation = async (locationId) => {
   const payload = {
@@ -19,15 +19,7 @@ export const fetchHotelsByLocation = async (locationId) => {
     traceId: "792b6d10-e0ce-4c58-82c6-e8c5e670e11a"
   };
 
-  const response = await axios.post(
-    "http://api.stayigo.com/v1.0/listing/hotels",
-    payload,
-    {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
-  );
+  const response = await api.post("/listing/hotels", payload);
 
   return response.data[0]?.data || [];
 };

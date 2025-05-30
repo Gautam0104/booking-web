@@ -37,7 +37,7 @@ export const ViewToggle = () => {
         <div className="d-flex justify-content-end">
           <div className="d-flex rounded-pill overflow-hidden p-2 view-toggle-buttons">
             <Link
-              to={`/dashboard/hotellist?location=${location}&checkin=${checkInDate}&checkout=${checkOutDate}&guests=2&rooms=1`}
+              to={`/hotellist?location=${location}&checkin=${checkInDate}&checkout=${checkOutDate}&guests=2&rooms=1`}
               className={`px-3 py-2 d-flex align-items-center justify-content-center text-white rounded-start-2 view-toggle-button ${
                 activeView === "list" ? "active" : ""
               }`}
@@ -52,7 +52,7 @@ export const ViewToggle = () => {
               />
             </Link>
             <Link
-              to={`/dashboard/hotelgrid?location=${location}&checkin=${checkInDate}&checkout=${checkOutDate}&guests=2&rooms=1`}
+              to={`/hotelgrid?location=${location}&checkin=${checkInDate}&checkout=${checkOutDate}&guests=2&rooms=1`}
               className={`px-3 py-2 d-flex align-items-center justify-content-center text-white rounded-end-2 view-toggle-button ${
                 activeView === "grid" ? "active" : ""
               }`}

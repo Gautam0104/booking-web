@@ -163,7 +163,7 @@ const SearchBox = () => {
     const checkout = dateRange[1]?.toISOString().split("T")[0];
 
     navigate(
-      `/dashboard/hotellist?location=${encodeURIComponent(
+      `/hotellist?location=${encodeURIComponent(
         location
       )}&checkin=${checkin}&checkout=${checkout}&guests=${guests}&rooms=${rooms}`
     );
@@ -181,8 +181,7 @@ const SearchBox = () => {
         backgroundColor: "#191b1d",
         color: "white",
         position: "relative",
-        zIndex: 10,
-        
+        zIndex: 10
       }}
       ref={searchBoxRef}
     >

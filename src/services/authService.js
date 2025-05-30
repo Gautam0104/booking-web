@@ -1,25 +1,24 @@
-import axios from 'axios';
-
-const API_BASE_URL = 'https://api.stayigo.com/v1.0';
+import api from "./api";
 
 export const signupUser = async (formData) => {
   const payload = {
     email: formData.email,
     phone: formData.phone,
     password: formData.password,
-    userType: 'Guest',
-    signupWith: 'Email'
+    userType: "Guest",
+    signupWith: "Email"
   };
 
-  const response = await axios.post(`${API_BASE_URL}/auth/signup`, payload);
+  const response = await api.post("/auth/signup", payload);
   return response.data;
 };
 
-
-
-
-export const loginUser = async ({ identifier, password, userType = "Guest" }) => {
-  const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+export const loginUser = async ({
+  identifier,
+  password,
+  userType = "Guest"
+}) => {
+  const response = await api.post("/auth/login", {
     identifier,
     password,
     userType
@@ -27,6 +26,3 @@ export const loginUser = async ({ identifier, password, userType = "Guest" }) =>
 
   return response.data;
 };
-
-
-

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Image17 from "../assets/img/hotelbooking/17.svg";
 import Image02 from "../assets/img/hotelbooking/02.jpg";
 import Swal from "sweetalert2";
-
+import { fetchUserDetails, createBooking } from "../services/bookingService";
 const HotelBooking = () => {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
@@ -53,20 +52,12 @@ const HotelBooking = () => {
   const [bookingStatus, setBookingStatus] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  console.log(setBookingStatus);
   useEffect(() => {
-    // Check if user is logged in and get their details
-    const fetchUserDetails = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (token) {
-          const response = await axios.get("http://api.stayigo.com/v1.0/user", {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-
-          const userData = response.data;
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetchUserDetails(token)
+        .then((userData) => {
           setFormData((prev) => ({
             ...prev,
             guestName: userData.name || "",
@@ -74,15 +65,12 @@ const HotelBooking = () => {
             guestMobile: userData.phone || ""
           }));
           setIsLoggedIn(true);
-        }
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-      }
-    };
-
-    fetchUserDetails();
+        })
+        .catch((error) => {
+          console.error("Error fetching user details:", error);
+        });
+    }
   }, []);
-
   // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -117,9 +105,9 @@ const HotelBooking = () => {
     try {
       const bookingData = {
         userId: 123,
-        hotelId: hotelId,
-        checkInDate: checkInDate,
-        checkOutDate: checkOutDate,
+        hotelId,
+        checkInDate,
+        checkOutDate,
         totalPrice: totalPrice || 48500.0,
         paymentMethod: "cash",
         specialRequests: "Quiet rooms, away from elevators",
@@ -147,24 +135,16 @@ const HotelBooking = () => {
         ]
       };
 
-      const response = await axios.post(
-        "http://api.stayigo.com/v1.0/booking/create",
-        bookingData,
-        {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      );
+      const response = await createBooking(bookingData);
 
       Swal.fire({
         icon: "success",
         title: "Booking Confirmed!",
-        text: `Your booking ID is: ${response.data.bookingId}`,
+        text: `Your booking ID is: ${response.bookingId}`,
         confirmButtonColor: "#3085d6"
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate(`/payment`);
+          navigate("/payment");
         }
       });
     } catch (error) {
@@ -179,7 +159,6 @@ const HotelBooking = () => {
       setIsLoading(false);
     }
   };
-
   return (
     <div className="bg-dark text-white min-vh-100 py-4 text-start">
       {/* Show booking status if available */}

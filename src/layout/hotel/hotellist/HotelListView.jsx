@@ -188,7 +188,7 @@ export const HotelListView = () => {
     locationline2
   ) => {
     navigate(
-      `/dashboard/roomdetail?id=${hotelId}&hotelName=${hotelName}&hotelPrice=${hotelPrice}&hotelLocationline1=${locationline1}&hotelLocationline2=${locationline2}&location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}`
+      `/roomdetail?id=${hotelId}&hotelName=${hotelName}&hotelPrice=${hotelPrice}&hotelLocationline1=${locationline1}&hotelLocationline2=${locationline2}&location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}`
     );
   };
 

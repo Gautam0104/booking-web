@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import { HotelList } from "../pages/HotelList";
@@ -39,20 +39,8 @@ const AppRoutes = () => {
   };
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/dashboard/home" replace />} />
-      <Route
-        path="/booking-web"
-        element={<Navigate to="/dashboard/home" replace />}
-      />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/payment" element={<Payment />} />
-      <Route
-        path="/bookingconfirm"
-        element={<BookingConfirm booking={exampleBooking} />}
-      />
-
-      <Route path="/dashboard" element={<Dashboard />}>
+      <Route path="/" element={<Dashboard />}>
+        <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="account" element={<Account />} />
@@ -70,6 +58,14 @@ const AppRoutes = () => {
         <Route path="location" element={<Location />} />
         <Route path="bookinglist" element={<BookingList />} />
       </Route>
+
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/payment" element={<Payment />} />
+      <Route
+        path="/bookingconfirm"
+        element={<BookingConfirm booking={exampleBooking} />}
+      />
     </Routes>
   );
 };

@@ -253,7 +253,7 @@ const RoomSelection = () => {
                 {/* Call to Action */}
                 <div className="d-grid">
                   <Link
-                    to={`/dashboard/hotelbooking?hotelId=${hotelId}&location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}&hotelPrice=${hotelPrice}&adults=${adults}&children=${children}&rooms=${rooms}&hotelName=${hotelName}&hotelAddress1=${addressLine1}&hotelAddress2=${addressLine2}`}
+                    to={`/hotelbooking?hotelId=${hotelId}&location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}&hotelPrice=${hotelPrice}&adults=${adults}&children=${children}&rooms=${rooms}&hotelName=${hotelName}&hotelAddress1=${addressLine1}&hotelAddress2=${addressLine2}`}
                     className="btn btn-primary btn-lg"
                   >
                     Continue to Book
