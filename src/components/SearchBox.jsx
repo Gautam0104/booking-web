@@ -182,8 +182,7 @@ const SearchBox = () => {
         color: "white",
         position: "relative",
         zIndex: 10,
-        width: window.innerWidth < 768 ? "100%" : "150%",
-        marginLeft: window.innerWidth < 768 ? "0" : "0"
+        
       }}
       ref={searchBoxRef}
     >

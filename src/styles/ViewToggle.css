@@ -1,0 +1,42 @@
+/* ViewToggle.css - Smooth active background transition only */
+
+.view-toggle-buttons {
+    display: inline-flex;
+
+    border-radius: 50px;
+    padding: 4px;
+}
+
+.view-toggle-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    color: white;
+    background-color: #333;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+    /* Only background-color transition */
+}
+
+.view-toggle-button:first-child {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+}
+
+.view-toggle-button:last-child {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.view-toggle-button.active {
+    background-color: #111;
+    /* Smooth transition to this color */
+}
+
+.view-toggle-button .text-primary {
+    color: #8e85e6 !important;
+}
+
+/* Removed all other transitions and animations */

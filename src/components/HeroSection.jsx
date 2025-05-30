@@ -31,7 +31,14 @@ const HeroSection = () => {
             </div>
 
             {/* Search Box */}
-            <SearchBox />
+            <div
+              style={{
+                width: window.innerWidth < 768 ? "100%" : "150%",
+                marginLeft: window.innerWidth < 768 ? "0" : "0"
+              }}
+            >
+              <SearchBox />
+            </div>
           </div>
 
           {/* Right Section */}
